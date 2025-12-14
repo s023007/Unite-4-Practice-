@@ -1,242 +1,362 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>مراجعة الوحدة الرابعة (الإحصاء)</title>
+<meta charset="UTF-8">
+<title>مراجعة الوحدة الرابعة – الإحصاء</title>
 
-  <style>
-    :root{
-      --blue:#1f5aa6;
-      --blue2:#e9f1ff;
-      --green2:#eaf8f0;
-      --orange2:#fff3e3;
-      --card:#ffffff;
-      --border:#d8dfe9;
-      --text:#111;
-      --muted:#555;
-      --shadow: 0 10px 25px rgba(0,0,0,.08);
-      --radius: 16px;
-    }
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: "Cairo","Noto Sans Arabic",system-ui,-apple-system,"Segoe UI",Arial;
-      background:#f5f7fb;
-      color:var(--text);
+<style>
+body{
+    font-family: "Cairo", "Tahoma", sans-serif;
+    background:#f4f7fb;
+    margin:0;
+    padding:0;
+    color:#222;
+}
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
 
-      /* ✅ فرض الأرقام الهندية */
-      font-variant-numeric: normal;
-    }
+/* العناوين */
+.main-title{
+    text-align:center;
+    font-size:26px;
+    color:#1f4fb2;
+    margin-bottom:10px;
+}
+.sub-title{
+    text-align:center;
+    font-size:18px;
+    margin-bottom:25px;
+}
 
-    /* ✅ إجبار المتصفح يعرض الأرقام العربية-الهندية */
-    html:lang(ar), body:lang(ar){
-      direction: rtl;
-      unicode-bidi: plaintext;
-    }
-    .digits{
-      font-variant-numeric: normal;
-      unicode-bidi: isolate;
-    }
+/* صفحة */
+.page-title{
+    font-size:20px;
+    color:#0b5ed7;
+    margin:40px 0 15px;
+    border-right:6px solid #0b5ed7;
+    padding-right:10px;
+}
 
-    .container{ max-width: 980px; margin:0 auto; padding: 18px 14px 60px; }
+/* كرت السؤال */
+.question-card{
+    background:#ffffff;
+    border-radius:12px;
+    padding:18px;
+    margin-bottom:25px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+.question-title{
+    font-weight:bold;
+    margin-bottom:10px;
+}
 
-    header{
-      background: linear-gradient(135deg, #ffffff, #eef5ff);
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px 18px 14px;
-      margin-bottom: 14px;
-    }
-    h1{ margin:0; font-size: 22px; color: var(--blue); }
-    .sub{ margin:8px 0 0; color: var(--muted); font-size: 14px; }
+/* مربع الحل */
+.solution{
+    background:#e9f7ef;
+    border-radius:10px;
+    padding:15px;
+    margin-top:10px;
+}
+.law{
+    background:#e7f0ff;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:8px;
+}
+.explain{
+    background:#fff3e6;
+    padding:10px;
+    border-radius:8px;
+    margin-top:8px;
+}
 
-    .page-title{
-      margin: 18px 0 8px;
-      font-size: 18px;
-      color: var(--blue);
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px; flex-wrap:wrap;
-    }
-    .page-note{ margin:0 0 10px; color:var(--muted); font-size: 13px; }
+/* الإجابة */
+.answer{
+    color:#c1121f;
+    font-weight:bold;
+    margin-top:10px;
+}
 
-    .qcard{
-      background: var(--card);
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 14px;
-      margin: 12px 0;
-    }
-    .qhead{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px; flex-wrap:wrap;
-      margin-bottom: 10px;
-    }
-    .qno{ font-weight:900; color: var(--blue); font-size: 16px; }
-    .tag{
-      font-size: 12px;
-      padding:6px 10px;
-      border-radius: 999px;
-      border:1px solid var(--border);
-      background:#fff;
-      color:#333;
-      font-weight:700;
-    }
+/* الجداول */
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+th, td{
+    border:1px solid #ccc;
+    padding:8px;
+    text-align:center;
+}
+th{
+    background:#eef3ff;
+}
 
-    .box{
-      border-radius: 14px;
-      padding: 12px;
-      border:1px solid;
-      margin: 10px 0;
-      line-height: 1.9;
-      font-size: 15px;
-      background:#fff;
-    }
-    .box.law{ background: var(--blue2); border-color:#b7cdf5; }
-    .box.work{ background: var(--green2); border-color:#bfe7cf; }
-    .box.short{ background: var(--orange2); border-color:#ffd7ac; color:#3a250d; }
+/* رمز المجموع – تصحيح الاتجاه */
+.sigma{
+    direction:ltr;
+    unicode-bidi:embed;
+    font-weight:bold;
+}
 
-    .answer{
-      margin-top:10px;
-      font-weight:900;
-      color:#b00020;
-      font-size: 16px;
-    }
+/* كسر رياضي */
+.frac{
+    display:inline-block;
+    text-align:center;
+    vertical-align:middle;
+}
+.frac .top{
+    border-bottom:1px solid #000;
+    display:block;
+    padding:0 4px;
+}
+.frac .bottom{
+    display:block;
+    padding:0 4px;
+}
 
-    /* ✅ كسر حقيقي */
-    .frac{
-      display:inline-block;
-      vertical-align:middle;
-      text-align:center;
-      line-height:1.1;
-      font-weight:800;
-      margin: 0 2px;
-    }
-    .frac .top{
-      display:block;
-      padding:0 7px 2px;
-      border-bottom:2px solid #111;
-    }
-    .frac .bottom{
-      display:block;
-      padding:2px 7px 0;
-    }
-
-    /* ✅ تثبيت اتجاه رمز المجموع ∑ */
-    .sum{
-      direction:ltr;
-      unicode-bidi:isolate;
-      display:inline-block;
-      font-weight:900;
-      margin: 0 2px;
-    }
-
-    /* ✅ جداول نظيفة */
-    .table-wrap{
-      overflow:auto;
-      border:1px solid var(--border);
-      border-radius: 14px;
-      background:#fff;
-      box-shadow: var(--shadow);
-      margin: 10px 0;
-    }
-    table{
-      border-collapse: collapse;
-      width: 100%;
-      min-width: 560px;
-      font-size: 14px;
-    }
-    th, td{
-      border-bottom:1px solid #e7edf7;
-      padding:10px;
-      text-align:center;
-      white-space:nowrap;
-    }
-    th{ background:#f2f6ff; color: var(--blue); font-weight:900; }
-  </style>
+/* أرقام هندية */
+body{
+    font-variant-numeric: normal;
+}
+</style>
 </head>
 
-<body lang="ar">
-  <div class="container digits">
-    <header>
-      <h1>📘 مراجعة الوحدة الرابعة (الإحصاء)</h1>
-      <p class="sub">نفس الصفحة (Scroll) — أرقام هندية — رمز المجموع ثابت — بدون أزرار تنقّل.</p>
-    </header>
+<body>
+<div class="container">
 
-    <!-- الصفحة ٢٩ (الجزء الذي أرسلته في الصورة) -->
-    <div class="page-title"><span>الصفحة ٢٩</span><span class="page-note">أسئلة: (٦) – (٨)</span></div>
+<div class="main-title">📘 مراجعة الوحدة الرابعة (الإحصاء)</div>
+<div class="sub-title">إعداد الأستاذ: زايد الرواحي</div>
 
-    <div class="qcard">
-      <div class="qhead">
-        <div class="qno">السؤال (٦)</div>
-        <div class="tag">(س + ثابت)</div>
-      </div>
+<!-- الصفحة 27 -->
+<div class="page-title">الصفحة ٢٧</div>
 
-      <div class="box work">
-        <span class="sum">∑</span>(س + ٥) =
-        <span class="sum">∑</span>س + ٥ن<br>
-        = ٧٢ + ٣٠ = ١٠٢
-      </div>
+<div class="question-card">
+<div class="question-title">السؤال (١)</div>
+إذا كان عدد القيم = ٣٠ ، وقيمة  
+<span class="sigma">∑س</span> = ١٢٠  
+فأوجد الوسط الحسابي.
 
-      <div class="answer">الإجابة: ١٠٢</div>
-    </div>
+<div class="solution">
+<div class="law">
+الوسط الحسابي =  
+<span class="frac">
+<span class="top">∑س</span>
+<span class="bottom">عدد القيم</span>
+</span>
+</div>
 
-    <div class="qcard">
-      <div class="qhead">
-        <div class="qno">السؤال (٧)</div>
-        <div class="tag">إيجاد س̄</div>
-      </div>
+<div class="explain">
+نعوض القيم المعطاة:
+</div>
 
-      <div class="box work">
-        <span class="sum">∑</span>(س − ٥) = ٤٠ ⇒
-        <span class="sum">∑</span>س = ٤٠ + ٥ن = ٤٠ + ٢٥ = ٦٥<br>
-        س̄ =
-        <span class="frac"><span class="top">٦٥</span><span class="bottom">٥</span></span>
-        = ١٣
-      </div>
+<div>
+<span class="frac">
+<span class="top">١٢٠</span>
+<span class="bottom">٣٠</span>
+</span>
+= ٤
+</div>
 
-      <div class="answer">الإجابة: ١٣</div>
-    </div>
+<div class="answer">الإجابة: ٤</div>
+</div>
+</div>
 
-    <div class="qcard">
-      <div class="qhead">
-        <div class="qno">السؤال (٨)</div>
-        <div class="tag">إيجاد س̄</div>
-      </div>
+<!-- الصفحة 28 -->
+<div class="page-title">الصفحة ٢٨</div>
 
-      <div class="box work">
-        <span class="sum">∑</span>(س + ٥) = ٤٠ ⇒
-        <span class="sum">∑</span>س = ٤٠ − ٢٥ = ١٥<br>
-        س̄ =
-        <span class="frac"><span class="top">١٥</span><span class="bottom">٥</span></span>
-        = ٣
-      </div>
+<div class="question-card">
+<div class="question-title">السؤال (٢)</div>
+إذا كان  
+<span class="sigma">∑س</span> = ١٥٠ ،  
+<span class="sigma">∑س²</span> = ١٥٠٠ ،  
+وعدد القيم = ٢٥  
+فأوجد التباين.
 
-      <div class="answer">الإجابة: ٣</div>
-    </div>
+<div class="solution">
+<div class="law">
+التباين =  
+<span class="frac">
+<span class="top">∑س²</span>
+<span class="bottom">ن</span>
+</span>
+− (الوسط الحسابي)²
+</div>
 
-    <!-- مثال جدول بنفس التنظيف -->
-    <div class="page-title"><span>مثال جدول محسّن</span><span class="page-note">للاستخدام في الأسئلة المقالية</span></div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>س</th><th>٢</th><th>٣</th><th>٤</th><th>٥</th><th>المجموع</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>ت</th><td>٧</td><td>١٠</td><td>١٢</td><td>١٣</td><td>٤٢</td>
-          </tr>
-          <tr>
-            <th>س×ت</th><td>١٤</td><td>٣٠</td><td>٤٨</td><td>٦٥</td><td>١٥٧</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="explain">
+أولًا نحسب الوسط الحسابي:
+</div>
 
-  </div>
+<div>
+<span class="frac">
+<span class="top">١٥٠</span>
+<span class="bottom">٢٥</span>
+</span>
+= ٦
+</div>
+
+<div class="explain">
+ثم نحسب التباين:
+</div>
+
+<div>
+<span class="frac">
+<span class="top">١٥٠٠</span>
+<span class="bottom">٢٥</span>
+</span>
+− ٦²  
+= ٦٠ − ٣٦ = ٢٤
+</div>
+
+<div class="answer">الإجابة: ٢٤</div>
+</div>
+</div>
+
+<!-- الصفحة 29 -->
+<div class="page-title">الصفحة ٢٩</div>
+
+<div class="question-card">
+<div class="question-title">السؤال (٣)</div>
+إذا كان  
+<span class="sigma">∑س</span> = ٤٠  
+و  
+<span class="sigma">∑(س − ٥)</span> = ٠  
+فأوجد قيمة س̄.
+
+<div class="solution">
+<div class="law">
+<span class="sigma">∑(س − ثابت)</span> =  
+<span class="sigma">∑س</span> − ن × ثابت
+</div>
+
+<div class="explain">
+بما أن المجموع يساوي صفرًا، فهذا يعني أن الثابت هو الوسط الحسابي.
+</div>
+
+<div class="answer">الإجابة: ٥</div>
+</div>
+</div>
+
+<!-- الصفحة 30 -->
+<div class="page-title">الصفحة ٣٠</div>
+
+<div class="question-card">
+<div class="question-title">السؤال (٤)</div>
+أوجد الانحراف المعياري إذا كان التباين = ٣٦.
+
+<div class="solution">
+<div class="law">
+الانحراف المعياري = √(التباين)
+</div>
+
+<div>
+√٣٦ = ٦
+</div>
+
+<div class="answer">الإجابة: ٦</div>
+</div>
+</div>
+
+<!-- الصفحة 31 -->
+<div class="page-title">الصفحة ٣١</div>
+
+<div class="question-card">
+<div class="question-title">السؤال (٥)</div>
+البيانات التالية تمثل قيم س:  
+٤٥ ، ٣٥ ، ٣٢ ، ٤٩ ، ٣٩ ، ٣٤  
+أوجد الوسط الحسابي.
+
+<div class="solution">
+<div class="explain">
+نجمع القيم ثم نقسم على عددها:
+</div>
+
+<div>
+<span class="frac">
+<span class="top">٢٣٤</span>
+<span class="bottom">٦</span>
+</span>
+= ٣٩
+</div>
+
+<div class="answer">الإجابة: ٣٩</div>
+</div>
+</div>
+
+<!-- الصفحة 32 -->
+<div class="page-title">الصفحة ٣٢</div>
+
+<div class="question-card">
+<div class="question-title">السؤال (٦)</div>
+أكمل الجدول ثم أوجد الوسط الحسابي.
+
+<table>
+<tr>
+<th>س</th><th>٢</th><th>٣</th><th>٤</th>
+</tr>
+<tr>
+<th>ت</th><th>٧</th><th>١٠</th><th>١٢</th>
+</tr>
+<tr>
+<th>س × ت</th><th>١٤</th><th>٣٠</th><th>٤٨</th>
+</tr>
+</table>
+
+<div class="solution">
+<div class="law">
+الوسط الحسابي =
+<span class="frac">
+<span class="top">∑(س × ت)</span>
+<span class="bottom">∑ت</span>
+</span>
+</div>
+
+<div>
+<span class="frac">
+<span class="top">٩٢</span>
+<span class="bottom">٢٩</span>
+</span>
+≈ ٣٫١٧
+</div>
+
+<div class="answer">الإجابة: ٣٫١٧ تقريبًا</div>
+</div>
+</div>
+
+<!-- الصفحة 33 -->
+<div class="page-title">الصفحة ٣٣</div>
+
+<div class="question-card">
+<div class="question-title">السؤال (٧)</div>
+إذا كان التباين = ٩ ، فأوجد الانحراف المعياري.
+
+<div class="solution">
+<div>
+√٩ = ٣
+</div>
+<div class="answer">الإجابة: ٣</div>
+</div>
+</div>
+
+<!-- الصفحة 34 -->
+<div class="page-title">الصفحة ٣٤</div>
+
+<div class="question-card">
+<div class="question-title">السؤال (٨)</div>
+علل: الانحراف المعياري لا يكون سالبًا.
+
+<div class="solution">
+<div class="explain">
+لأن الانحراف المعياري ناتج عن الجذر التربيعي للتباين، والجذر التربيعي لأي عدد موجب أو صفر لا يكون سالبًا.
+</div>
+
+<div class="answer">الإجابة: لأن الجذر التربيعي لا يعطي قيمة سالبة.</div>
+</div>
+</div>
+
+</div>
 </body>
 </html>
