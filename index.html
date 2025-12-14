@@ -9,9 +9,7 @@
     :root{
       --blue:#1f5aa6;
       --blue2:#e9f1ff;
-      --green:#1e7d4f;
       --green2:#eaf8f0;
-      --orange:#b46b19;
       --orange2:#fff3e3;
       --card:#ffffff;
       --border:#d8dfe9;
@@ -23,70 +21,45 @@
     *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family: "Cairo", "Noto Sans Arabic", system-ui, -apple-system, "Segoe UI", Arial;
-      background: #f5f7fb;
-      color: var(--text);
+      font-family: "Cairo","Noto Sans Arabic",system-ui,-apple-system,"Segoe UI",Arial;
+      background:#f5f7fb;
+      color:var(--text);
+
+      /* ✅ فرض الأرقام الهندية */
+      font-variant-numeric: normal;
     }
-    .container{ max-width: 980px; margin: 0 auto; padding: 18px 14px 60px; }
+
+    /* ✅ إجبار المتصفح يعرض الأرقام العربية-الهندية */
+    html:lang(ar), body:lang(ar){
+      direction: rtl;
+      unicode-bidi: plaintext;
+    }
+    .digits{
+      font-variant-numeric: normal;
+      unicode-bidi: isolate;
+    }
+
+    .container{ max-width: 980px; margin:0 auto; padding: 18px 14px 60px; }
+
     header{
       background: linear-gradient(135deg, #ffffff, #eef5ff);
       border:1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 18px 18px 14px;
+      margin-bottom: 14px;
     }
-    .title-row{
-      display:flex; align-items:center; gap:12px; justify-content:space-between; flex-wrap:wrap;
-    }
-    h1{
-      margin:0;
-      font-size: 22px;
-      color: var(--blue);
-    }
-    .sub{
-      margin:8px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .tabs{
-      margin-top:14px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-    .tab{
-      border:1px solid var(--border);
-      background:#fff;
-      padding:8px 10px;
-      border-radius: 12px;
-      cursor:pointer;
-      font-weight:700;
-      color:#222;
-      font-size: 13px;
-    }
-    .tab.active{
-      background: var(--blue2);
-      border-color: #b7cdf5;
-      color: var(--blue);
-    }
-
-    .page{
-      margin-top: 14px;
-      display:none;
-    }
-    .page.active{ display:block; }
+    h1{ margin:0; font-size: 22px; color: var(--blue); }
+    .sub{ margin:8px 0 0; color: var(--muted); font-size: 14px; }
 
     .page-title{
-      margin: 16px 0 10px;
+      margin: 18px 0 8px;
       font-size: 18px;
       color: var(--blue);
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; flex-wrap:wrap;
     }
-    .page-note{
-      font-size: 13px;
-      color: var(--muted);
-      margin: 0 0 10px;
-    }
+    .page-note{ margin:0 0 10px; color:var(--muted); font-size: 13px; }
 
     .qcard{
       background: var(--card);
@@ -97,15 +70,11 @@
       margin: 12px 0;
     }
     .qhead{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; flex-wrap:wrap;
       margin-bottom: 10px;
-      flex-wrap:wrap;
     }
-    .qno{
-      font-weight:900;
-      color: var(--blue);
-      font-size: 16px;
-    }
+    .qno{ font-weight:900; color: var(--blue); font-size: 16px; }
     .tag{
       font-size: 12px;
       padding:6px 10px;
@@ -118,15 +87,16 @@
 
     .box{
       border-radius: 14px;
-      padding: 12px 12px;
+      padding: 12px;
       border:1px solid;
       margin: 10px 0;
       line-height: 1.9;
       font-size: 15px;
+      background:#fff;
     }
-    .box.law{ background: var(--blue2); border-color: #b7cdf5; }
-    .box.work{ background: var(--green2); border-color: #bfe7cf; }
-    .box.short{ background: var(--orange2); border-color: #ffd7ac; color:#3a250d; }
+    .box.law{ background: var(--blue2); border-color:#b7cdf5; }
+    .box.work{ background: var(--green2); border-color:#bfe7cf; }
+    .box.short{ background: var(--orange2); border-color:#ffd7ac; color:#3a250d; }
 
     .answer{
       margin-top:10px;
@@ -135,13 +105,14 @@
       font-size: 16px;
     }
 
-    /* كسر جميل */
+    /* ✅ كسر حقيقي */
     .frac{
       display:inline-block;
       vertical-align:middle;
       text-align:center;
       line-height:1.1;
       font-weight:800;
+      margin: 0 2px;
     }
     .frac .top{
       display:block;
@@ -152,9 +123,17 @@
       display:block;
       padding:2px 7px 0;
     }
-    .frac.sm{ font-size: .95em; }
 
-    /* جداول محسنة */
+    /* ✅ تثبيت اتجاه رمز المجموع ∑ */
+    .sum{
+      direction:ltr;
+      unicode-bidi:isolate;
+      display:inline-block;
+      font-weight:900;
+      margin: 0 2px;
+    }
+
+    /* ✅ جداول نظيفة */
     .table-wrap{
       overflow:auto;
       border:1px solid var(--border);
@@ -171,525 +150,93 @@
     }
     th, td{
       border-bottom:1px solid #e7edf7;
-      padding:10px 10px;
+      padding:10px;
       text-align:center;
       white-space:nowrap;
     }
-    th{
-      background:#f2f6ff;
-      color: var(--blue);
-      font-weight:900;
-    }
-    tr:hover td{ background:#fafcff; }
-
-    /* رسومات */
-    .svg-wrap{
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:#fff;
-      box-shadow: var(--shadow);
-      padding: 10px;
-      margin: 10px 0;
-    }
-    .muted{ color: var(--muted); }
-    .small{ font-size: 13px; }
-
-    /* أزرار */
-    .row{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
-      margin-top: 10px;
-    }
-    .btn{
-      border:1px solid var(--border);
-      background:#fff;
-      padding:8px 10px;
-      border-radius: 12px;
-      cursor:pointer;
-      font-weight:900;
-      font-size: 13px;
-    }
-    .btn.primary{
-      background: var(--blue2);
-      border-color:#b7cdf5;
-      color: var(--blue);
-    }
+    th{ background:#f2f6ff; color: var(--blue); font-weight:900; }
   </style>
 </head>
 
-<body>
-  <div class="container">
+<body lang="ar">
+  <div class="container digits">
     <header>
-      <div class="title-row">
-        <h1>📘 مراجعة الوحدة الرابعة (الإحصاء)</h1>
-        <span class="tag">إعداد الأستاذ: زايد الرواحي</span>
-      </div>
-      <p class="sub">مقسمة حسب صفحات الكتاب من ٢٧ إلى ٣٤ — مع عرض القوانين، الحل، وطريقة مختصرة.</p>
-
-      <div class="tabs" id="tabs">
-        <button class="tab active" data-page="p27">صفحة ٢٧</button>
-        <button class="tab" data-page="p28">صفحة ٢٨</button>
-        <button class="tab" data-page="p29">صفحة ٢٩</button>
-        <button class="tab" data-page="p30">صفحة ٣٠</button>
-        <button class="tab" data-page="p31">صفحة ٣١</button>
-        <button class="tab" data-page="p32">صفحة ٣٢</button>
-        <button class="tab" data-page="p33">صفحة ٣٣</button>
-        <button class="tab" data-page="p34">صفحة ٣٤</button>
-      </div>
+      <h1>📘 مراجعة الوحدة الرابعة (الإحصاء)</h1>
+      <p class="sub">نفس الصفحة (Scroll) — أرقام هندية — رمز المجموع ثابت — بدون أزرار تنقّل.</p>
     </header>
 
-    <!-- صفحة ٢٧ -->
-    <section class="page active" id="p27">
-      <div class="page-title">
-        <span>الصفحة ٢٧</span>
-        <span class="muted small">أسئلة: (١) – (٢)</span>
+    <!-- الصفحة ٢٩ (الجزء الذي أرسلته في الصورة) -->
+    <div class="page-title"><span>الصفحة ٢٩</span><span class="page-note">أسئلة: (٦) – (٨)</span></div>
+
+    <div class="qcard">
+      <div class="qhead">
+        <div class="qno">السؤال (٦)</div>
+        <div class="tag">(س + ثابت)</div>
       </div>
 
-      <div class="qcard">
-        <div class="qhead">
-          <div class="qno">السؤال (١)</div>
-          <div class="tag">الوسط الحسابي</div>
-        </div>
-
-        <div class="box law">
-          <b>القانون:</b>
-          س̄ =
-          <span class="frac sm">
-            <span class="top">∑س</span>
-            <span class="bottom">ن</span>
-          </span>
-        </div>
-
-        <div class="box work">
-          <b>الحل:</b><br>
-          عدد القيم ن = 5 ، وس̄ = 10 ⇒ ∑س = 10×5 = 50<br>
-          القيم: 4 ، س ، 18 ، 8 ، 5<br>
-          مجموع المعلوم = 4+18+8+5 = 35<br>
-          إذن س = 50 − 35 = 15
-        </div>
-
-        <div class="box short">
-          <b>طريقة مختصرة:</b> إذا عرفت المتوسط وعدد القيم → احسب المجموع ثم اطرح المعلوم.
-        </div>
-
-        <div class="answer">الإجابة: ١٥</div>
+      <div class="box work">
+        <span class="sum">∑</span>(س + ٥) =
+        <span class="sum">∑</span>س + ٥ن<br>
+        = ٧٢ + ٣٠ = ١٠٢
       </div>
 
-      <div class="qcard">
-        <div class="qhead">
-          <div class="qno">السؤال (٢)</div>
-          <div class="tag">إيجاد عدد القيم</div>
-        </div>
+      <div class="answer">الإجابة: ١٠٢</div>
+    </div>
 
-        <div class="box law">
-          <b>القانون:</b>
-          ن =
-          <span class="frac sm">
-            <span class="top">∑س</span>
-            <span class="bottom">س̄</span>
-          </span>
-        </div>
-
-        <div class="box work">
-          ∑س = 45 ، س̄ = 5<br>
-          ن =
-          <span class="frac sm">
-            <span class="top">45</span>
-            <span class="bottom">5</span>
-          </span>
-          = 9
-        </div>
-
-        <div class="answer">الإجابة: ٩</div>
+    <div class="qcard">
+      <div class="qhead">
+        <div class="qno">السؤال (٧)</div>
+        <div class="tag">إيجاد س̄</div>
       </div>
 
-      <div class="svg-wrap">
-        <div class="muted small"><b>رسم توضيحي:</b> فكرة أن المتوسط “مركز” القيم</div>
-        <svg viewBox="0 0 720 120" width="100%" height="120" aria-label="mean diagram">
-          <line x1="40" y1="70" x2="680" y2="70" stroke="#222" stroke-width="2"/>
-          <circle cx="120" cy="70" r="8" fill="#1f5aa6"/><text x="120" y="98" text-anchor="middle" font-size="14">4</text>
-          <circle cx="240" cy="70" r="8" fill="#1f5aa6"/><text x="240" y="98" text-anchor="middle" font-size="14">8</text>
-          <circle cx="360" cy="70" r="8" fill="#1f5aa6"/><text x="360" y="98" text-anchor="middle" font-size="14">15</text>
-          <circle cx="480" cy="70" r="8" fill="#1f5aa6"/><text x="480" y="98" text-anchor="middle" font-size="14">18</text>
-          <circle cx="600" cy="70" r="8" fill="#1f5aa6"/><text x="600" y="98" text-anchor="middle" font-size="14">5</text>
-          <rect x="340" y="18" width="40" height="28" rx="8" fill="#e9f1ff" stroke="#b7cdf5"/>
-          <text x="360" y="38" text-anchor="middle" font-size="14" fill="#1f5aa6" font-weight="700">س̄</text>
-        </svg>
-      </div>
-    </section>
-
-    <!-- صفحة ٢٨ -->
-    <section class="page" id="p28">
-      <div class="page-title"><span>الصفحة ٢٨</span><span class="muted small">أسئلة: (٣) – (٥)</span></div>
-
-      <div class="qcard">
-        <div class="qhead"><div class="qno">السؤال (٣)</div><div class="tag">س̄</div></div>
-        <div class="box work">
-          ∑س = 120 ، ن = 20<br>
-          س̄ =
-          <span class="frac sm"><span class="top">120</span><span class="bottom">20</span></span>
-          = 6
-        </div>
-        <div class="answer">الإجابة: ٦</div>
+      <div class="box work">
+        <span class="sum">∑</span>(س − ٥) = ٤٠ ⇒
+        <span class="sum">∑</span>س = ٤٠ + ٥ن = ٤٠ + ٢٥ = ٦٥<br>
+        س̄ =
+        <span class="frac"><span class="top">٦٥</span><span class="bottom">٥</span></span>
+        = ١٣
       </div>
 
-      <div class="qcard">
-        <div class="qhead"><div class="qno">السؤال (٤)</div><div class="tag">∑س</div></div>
-        <div class="box work">
-          ن = 6 ، س̄ = 12 ⇒ ∑س = 12×6 = 72
-        </div>
-        <div class="answer">الإجابة: ٧٢</div>
+      <div class="answer">الإجابة: ١٣</div>
+    </div>
+
+    <div class="qcard">
+      <div class="qhead">
+        <div class="qno">السؤال (٨)</div>
+        <div class="tag">إيجاد س̄</div>
       </div>
 
-      <div class="qcard">
-        <div class="qhead"><div class="qno">السؤال (٥)</div><div class="tag">تحويل مجموع</div></div>
-        <div class="box work">
-          ∑(س−5) = ∑س − 5ن<br>
-          ∑س = 72 ، ن = 6 ⇒ ∑(س−5) = 72 − 30 = 42
-        </div>
-        <div class="answer">الإجابة: ٤٢</div>
-      </div>
-    </section>
-
-    <!-- صفحة ٢٩ -->
-    <section class="page" id="p29">
-      <div class="page-title"><span>الصفحة ٢٩</span><span class="muted small">أسئلة: (٦) – (٨)</span></div>
-
-      <div class="qcard">
-        <div class="qhead"><div class="qno">السؤال (٦)</div><div class="tag">∑(س+ثابت)</div></div>
-        <div class="box work">
-          ∑(س+5) = ∑س + 5ن = 72 + 30 = 102
-        </div>
-        <div class="answer">الإجابة: ١٠٢</div>
+      <div class="box work">
+        <span class="sum">∑</span>(س + ٥) = ٤٠ ⇒
+        <span class="sum">∑</span>س = ٤٠ − ٢٥ = ١٥<br>
+        س̄ =
+        <span class="frac"><span class="top">١٥</span><span class="bottom">٥</span></span>
+        = ٣
       </div>
 
-      <div class="qcard">
-        <div class="qhead"><div class="qno">السؤال (٧)</div><div class="tag">إيجاد س̄</div></div>
-        <div class="box work">
-          ∑(س−5) = 40 ⇒ ∑س = 40 + 5ن = 40 + 25 = 65<br>
-          س̄ =
-          <span class="frac sm"><span class="top">65</span><span class="bottom">5</span></span>
-          = 13
-        </div>
-        <div class="answer">الإجابة: ١٣</div>
-      </div>
+      <div class="answer">الإجابة: ٣</div>
+    </div>
 
-      <div class="qcard">
-        <div class="qhead"><div class="qno">السؤال (٨)</div><div class="tag">إيجاد س̄</div></div>
-        <div class="box work">
-          ∑(س+5) = 40 ⇒ ∑س = 40 − 25 = 15<br>
-          س̄ =
-          <span class="frac sm"><span class="top">15</span><span class="bottom">5</span></span>
-          = 3
-        </div>
-        <div class="answer">الإجابة: ٣</div>
-      </div>
-    </section>
-
-    <!-- صفحة ٣٠ -->
-    <section class="page" id="p30">
-      <div class="page-title"><span>الصفحة ٣٠</span><span class="muted small">أسئلة: (٩) – (١١)</span></div>
-
-      <div class="qcard">
-        <div class="qhead"><div class="qno">السؤال (٩)</div><div class="tag">∑(س+6)</div></div>
-        <div class="box work">
-          ∑(س+6) = 60 ⇒ ∑س = 60 − 6ن = 60 − 30 = 30<br>
-          س̄ =
-          <span class="frac sm"><span class="top">30</span><span class="bottom">5</span></span>
-          = 6
-        </div>
-        <div class="answer">الإجابة: ٦</div>
-      </div>
-
-      <div class="qcard">
-        <div class="qhead"><div class="qno">السؤال (١٠)</div><div class="tag">وسط موزون</div></div>
-        <div class="box law">
-          <b>القانون:</b> س̄ =
-          <span class="frac sm">
-            <span class="top">∑(س×ت)</span>
-            <span class="bottom">∑ت</span>
-          </span>
-        </div>
-        <div class="box work">
-          ∑ت = 25 ، ∑(س×ت) = 150<br>
-          س̄ =
-          <span class="frac sm"><span class="top">150</span><span class="bottom">25</span></span>
-          = 6
-        </div>
-        <div class="answer">الإجابة: ٦</div>
-      </div>
-
-      <div class="qcard">
-        <div class="qhead"><div class="qno">السؤال (١١)</div><div class="tag">تحويل (س−5)ت</div></div>
-        <div class="box work">
-          ∑((س−5)ت)=∑(س ت)−5∑ت<br>
-          150 = ∑(س ت) − 5×25 ⇒ ∑(س ت)=150+125=275<br>
-          س̄ =
-          <span class="frac sm"><span class="top">275</span><span class="bottom">25</span></span>
-          = 11
-        </div>
-        <div class="answer">الإجابة: ١١</div>
-      </div>
-    </section>
-
-    <!-- صفحة ٣١ -->
-    <section class="page" id="p31">
-      <div class="page-title"><span>الصفحة ٣١</span><span class="muted small">أسئلة: (١٢) – (١٤)</span></div>
-
-      <div class="qcard">
-        <div class="qhead"><div class="qno">السؤال (١٢)</div><div class="tag">التباين</div></div>
-        <div class="box law">
-          <b>القانون:</b> التباين =
-          <span class="frac sm"><span class="top">∑س²</span><span class="bottom">ن</span></span>
-          − (س̄)²
-        </div>
-        <div class="box work">
-          ن=25 ، ∑س=150 ⇒ س̄=
-          <span class="frac sm"><span class="top">150</span><span class="bottom">25</span></span>=6<br>
-          <span class="frac sm"><span class="top">∑س²</span><span class="bottom">ن</span></span>
-          =
-          <span class="frac sm"><span class="top">1500</span><span class="bottom">25</span></span>
-          = 60<br>
-          التباين = 60 − 36 = 24
-        </div>
-        <div class="answer">الإجابة: ٢٤</div>
-      </div>
-
-      <div class="qcard">
-        <div class="qhead"><div class="qno">السؤال (١٣)</div><div class="tag">الانحراف المعياري</div></div>
-        <div class="box work">
-          ن=10 ، ∑س=50 ⇒ س̄=5<br>
-          <span class="frac sm"><span class="top">∑س²</span><span class="bottom">ن</span></span>
-          =
-          <span class="frac sm"><span class="top">300</span><span class="bottom">10</span></span>
-          =30<br>
-          التباين=30−25=5 ⇒ الانحراف=√5
-        </div>
-        <div class="answer">الإجابة: √٥</div>
-      </div>
-
-      <div class="qcard">
-        <div class="qhead"><div class="qno">السؤال (١٤)</div><div class="tag">موزون</div></div>
-        <div class="box law">
-          <b>القانون:</b> التباين =
-          <span class="frac sm"><span class="top">∑(س²ت)</span><span class="bottom">∑ت</span></span>
-          − (س̄)²
-        </div>
-        <div class="box work">
-          ∑ت=25 ، ∑(س ت)=150 ⇒ س̄=6<br>
-          <span class="frac sm"><span class="top">∑(س²ت)</span><span class="bottom">∑ت</span></span>
-          =
-          <span class="frac sm"><span class="top">900</span><span class="bottom">25</span></span>
-          =36<br>
-          التباين=36−36=0 ⇒ الانحراف=0
-        </div>
-        <div class="answer">الإجابة: ٠</div>
-      </div>
-
-      <div class="svg-wrap">
-        <div class="muted small"><b>رسم توضيحي:</b> كلما اقتربت القيم من المتوسط يقل الانحراف</div>
-        <svg viewBox="0 0 720 120" width="100%" height="120" aria-label="std diagram">
-          <line x1="40" y1="70" x2="680" y2="70" stroke="#222" stroke-width="2"/>
-          <rect x="340" y="20" width="40" height="28" rx="8" fill="#eaf8f0" stroke="#bfe7cf"/>
-          <text x="360" y="40" text-anchor="middle" font-size="14" fill="#1e7d4f" font-weight="700">س̄</text>
-          <circle cx="320" cy="70" r="7" fill="#1e7d4f"/>
-          <circle cx="360" cy="70" r="7" fill="#1e7d4f"/>
-          <circle cx="400" cy="70" r="7" fill="#1e7d4f"/>
-          <text x="360" y="104" text-anchor="middle" font-size="13" fill="#555">تقارب = انحراف أصغر</text>
-        </svg>
-      </div>
-    </section>
-
-    <!-- صفحة ٣٢ -->
-    <section class="page" id="p32">
-      <div class="page-title"><span>الصفحة ٣٢</span><span class="muted small">أسئلة: (١٥) – (١٧)</span></div>
-
-      <div class="qcard">
-        <div class="qhead"><div class="qno">السؤال (١٥)</div><div class="tag">الانحراف</div></div>
-        <div class="box work">
-          ن=10 ، س̄=4 ، ∑س²=250<br>
-          <span class="frac sm"><span class="top">∑س²</span><span class="bottom">ن</span></span>
-          =
-          <span class="frac sm"><span class="top">250</span><span class="bottom">10</span></span>
-          =25<br>
-          التباين=25−16=9 ⇒ الانحراف=3
-        </div>
-        <div class="answer">الإجابة: ٣</div>
-      </div>
-
-      <div class="qcard">
-        <div class="qhead"><div class="qno">السؤال (١٧)</div><div class="tag">الانحراف</div></div>
-        <div class="box work">
-          ن=6 ، س̄=8 ، ∑س²=600<br>
-          <span class="frac sm"><span class="top">600</span><span class="bottom">6</span></span>
-          =100<br>
-          التباين=100−64=36 ⇒ الانحراف=6
-        </div>
-        <div class="answer">الإجابة: ٦</div>
-      </div>
-    </section>
-
-    <!-- صفحة ٣٣ -->
-    <section class="page" id="p33">
-      <div class="page-title"><span>الصفحة ٣٣</span><span class="muted small">أسئلة مقالية (جداول)</span></div>
-
-      <div class="qcard">
-        <div class="qhead"><div class="qno">سؤال مقالي (١)</div><div class="tag">جدول (س ، ت)</div></div>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>س</th><th>٢</th><th>٣</th><th>٥</th><th>٦</th><th>المجموع</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>ت</th><td>٣</td><td>٢</td><td>٣</td><td>٤</td><td>١٢</td>
-              </tr>
-              <tr>
-                <th>س×ت</th><td>٦</td><td>٦</td><td>١٥</td><td>٢٤</td><td>٥١</td>
-              </tr>
-              <tr>
-                <th>س²×ت</th><td>١٢</td><td>١٨</td><td>٧٥</td><td>١٤٤</td><td>٢٤٩</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="box law">
-          س̄ =
-          <span class="frac sm"><span class="top">∑(س ت)</span><span class="bottom">∑ت</span></span>
-          ،
-          التباين =
-          <span class="frac sm"><span class="top">∑(س²ت)</span><span class="bottom">∑ت</span></span>
-          − (س̄)²
-        </div>
-
-        <div class="box work">
-          س̄ =
-          <span class="frac sm"><span class="top">٥١</span><span class="bottom">١٢</span></span>
-          =
-          <span class="frac sm"><span class="top">١٧</span><span class="bottom">٤</span></span>
-          = 4.25<br>
-          <span class="frac sm"><span class="top">∑(س²ت)</span><span class="bottom">∑ت</span></span>
-          =
-          <span class="frac sm"><span class="top">٢٤٩</span><span class="bottom">١٢</span></span>
-          = 20.75<br>
-          التباين = 20.75 − (4.25)² = 2.6875 =
-          <span class="frac sm"><span class="top">٤٣</span><span class="bottom">١٦</span></span><br>
-          الانحراف =
-          <span class="frac sm"><span class="top">√٤٣</span><span class="bottom">٤</span></span>
-        </div>
-
-        <div class="answer">النتيجة: س̄ = ٤٫٢٥ ، الانحراف = √٤٣ / ٤</div>
-      </div>
-    </section>
-
-    <!-- صفحة ٣٤ -->
-    <section class="page" id="p34">
-      <div class="page-title"><span>الصفحة ٣٤</span><span class="muted small">سؤال الأجور + بيانات مفردة</span></div>
-
-      <div class="qcard">
-        <div class="qhead"><div class="qno">سؤال الأجور</div><div class="tag">إكمال جدول + وسط موزون</div></div>
-
-        <div class="box work">
-          المجموع 50 ⇒ هـ = 50 − (7+10+12+13) = 8
-        </div>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>معدل الأجر (س)</th><th>٢</th><th>٣</th><th>٤</th><th>٥</th><th>٦</th><th>المجموع</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>عدد الموظفين (ت)</th><td>٧</td><td>١٠</td><td>١٢</td><td>١٣</td><td>٨</td><td>٥٠</td>
-              </tr>
-              <tr>
-                <th>س×ت</th><td>١٤</td><td>٣٠</td><td>٤٨</td><td>٦٥</td><td>٤٨</td><td>٢٠٥</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="box law">
-          س̄ =
-          <span class="frac sm"><span class="top">∑(س ت)</span><span class="bottom">∑ت</span></span>
-          =
-          <span class="frac sm"><span class="top">٢٠٥</span><span class="bottom">٥٠</span></span>
-          = 4.1
-        </div>
-
-        <div class="answer">النتيجة: هـ = ٨ ، س̄ = ٤٫١</div>
-      </div>
-
-      <div class="qcard">
-        <div class="qhead"><div class="qno">بيانات مفردة</div><div class="tag">وسط + انحراف</div></div>
-
-        <div class="box work">
-          البيانات: 45 ، 35 ، 42 ، 49 ، 39 ، 34<br>
-          ∑س = 244 ⇒ س̄ =
-          <span class="frac sm"><span class="top">٢٤٤</span><span class="bottom">٦</span></span>
-          =
-          <span class="frac sm"><span class="top">١٢٢</span><span class="bottom">٣</span></span><br>
-          ∑س² = 10092 ⇒
-          <span class="frac sm"><span class="top">∑س²</span><span class="bottom">ن</span></span>
-          =
-          <span class="frac sm"><span class="top">١٠٠٩٢</span><span class="bottom">٦</span></span>
-          = 1682<br>
-          التباين = 1682 −
-          <span class="frac sm"><span class="top">(١٢٢)²</span><span class="bottom">(٣)²</span></span>
-          =
-          <span class="frac sm"><span class="top">٢٥٤</span><span class="bottom">٩</span></span><br>
-          الانحراف =
-          <span class="frac sm"><span class="top">√٢٥٤</span><span class="bottom">٣</span></span>
-        </div>
-
-        <div class="answer">النتيجة: س̄ = ١٢٢/٣ ، الانحراف = √٢٥٤ / ٣</div>
-      </div>
-    </section>
-
-    <div class="row">
-      <button class="btn" id="prevBtn">⬅ السابق</button>
-      <button class="btn primary" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆ أعلى الصفحة</button>
-      <button class="btn" id="nextBtn">التالي ➡</button>
+    <!-- مثال جدول بنفس التنظيف -->
+    <div class="page-title"><span>مثال جدول محسّن</span><span class="page-note">للاستخدام في الأسئلة المقالية</span></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>س</th><th>٢</th><th>٣</th><th>٤</th><th>٥</th><th>المجموع</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>ت</th><td>٧</td><td>١٠</td><td>١٢</td><td>١٣</td><td>٤٢</td>
+          </tr>
+          <tr>
+            <th>س×ت</th><td>١٤</td><td>٣٠</td><td>٤٨</td><td>٦٥</td><td>١٥٧</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
   </div>
-
-  <script>
-    const tabs = [...document.querySelectorAll(".tab")];
-    const pages = [...document.querySelectorAll(".page")];
-    const order = pages.map(p => p.id);
-
-    function openPage(id){
-      pages.forEach(p => p.classList.toggle("active", p.id === id));
-      tabs.forEach(t => t.classList.toggle("active", t.dataset.page === id));
-      localStorage.setItem("unit4_page", id);
-      window.scrollTo({top:0, behavior:"smooth"});
-    }
-
-    tabs.forEach(t => t.addEventListener("click", () => openPage(t.dataset.page)));
-
-    // next / prev
-    function currentIndex(){
-      const active = pages.find(p => p.classList.contains("active"));
-      return Math.max(0, order.indexOf(active.id));
-    }
-    document.getElementById("nextBtn").addEventListener("click", () => {
-      const i = currentIndex();
-      if(i < order.length-1) openPage(order[i+1]);
-    });
-    document.getElementById("prevBtn").addEventListener("click", () => {
-      const i = currentIndex();
-      if(i > 0) openPage(order[i-1]);
-    });
-
-    // restore last
-    const saved = localStorage.getItem("unit4_page");
-    if(saved && document.getElementById(saved)) openPage(saved);
-  </script>
 </body>
 </html>
