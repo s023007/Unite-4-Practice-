@@ -23,6 +23,7 @@
       --soft-blue:#eaf2ff;
       --soft-green:#eaf9f0;
       --soft-amber:#fff3df;
+      --soft-gray:#f8fafc;
       --border:#e5e7eb;
 
       --radius:18px;
@@ -78,7 +79,7 @@
       border:1px dashed #c7d2fe;
       padding:10px 12px;
       border-radius: 14px;
-      width:min(760px, 100%);
+      width:min(820px, 100%);
     }
 
     /* عنوان الصفحة (رقم الصفحة) */
@@ -173,6 +174,7 @@
     .row.blue{background: var(--soft-blue)}
     .row.green{background: var(--soft-green)}
     .row.amber{background: var(--soft-amber)}
+    .row.gray{background: var(--soft-gray)}
     .row .lbl{
       font-weight:900;
       color:#0b3a8a;
@@ -228,6 +230,24 @@
       text-align:center;
     }
 
+    /* س̄ واضح (بدون اعتماد على رمز مركّب قد يختفي) */
+    .xbar{
+      position:relative;
+      display:inline-block;
+      padding: 0 .08em;
+      font-weight:900;
+      line-height:1.1;
+    }
+    .xbar:after{
+      content:"";
+      position:absolute;
+      left:-2%;
+      right:-2%;
+      top:-0.12em;     /* قريب جداً من الحرف */
+      border-top: 2.4px solid #0f172a;
+      opacity: .95;
+    }
+
     /* جدول */
     table{
       width:100%;
@@ -252,13 +272,8 @@
       color:#0b3a8a;
       font-weight:900;
     }
-    .tfoot td{
-      background:#f8fafc;
-      font-weight:900;
-      color:#0f172a;
-    }
 
-    /* رسم بسيط */
+    /* صندوق رسم */
     .svgbox{
       border:1px solid var(--border);
       border-radius: 14px;
@@ -273,14 +288,22 @@
       font-size: 15px;
     }
 
-    /* أرقام هندية تلقائياً داخل عناصر محددة */
+    /* أرقام هندية */
     .hindi{ font-variant-numeric: normal; }
 
-    /* فاصل لطيف */
     .divider{
       height:1px;
       background: linear-gradient(90deg, transparent, rgba(2,6,23,.12), transparent);
       margin: 12px 0 0;
+    }
+
+    /* عنوان طريقة داخل السؤال */
+    .method-title{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:900;
+      color:#0b3a8a;
     }
   </style>
 </head>
@@ -292,7 +315,8 @@
       <div class="title">📘 مراجعة الوحدة الرابعة (الإحصاء)</div>
       <p class="sub">إعداد الأستاذ: زايـد الرواحي</p>
       <div class="note">
-        ملاحظة مهمة: تم ضبط <b>∑</b> حتى لا ينعكس، وتمت كتابة القوانين التي فيها بسط ومقام على شكل <b>كسور</b> فقط، مع استخدام <b>الأرقام الهندية</b> في كل مكان.
+        ✅ تم تعديل الحلول لتكون <b>بأكثر من طريقة</b> (حتى ٣ طرق عند الحاجة).<br>
+        ✅ تم ضبط <b>∑</b> (لا تنعكس) والكسور بشكل واضح، وتم عمل <b>س̄</b> بخط فوق س (واضح للطلاب).
       </div>
     </div>
 
@@ -300,12 +324,12 @@
     <section class="page" id="p27">
       <div class="page-head">
         <div class="pno hindi">الصفحة ٢٧</div>
-        <div class="range hindi">أسئلة: (١) – (٢) + ملخص القوانين</div>
+        <div class="range hindi">أسئلة: (١) – (٢) + ملخص القوانين + طريقة المثلث</div>
       </div>
 
       <div class="q">
         <div class="qhead">
-          <div class="qn hindi">ملخص القوانين</div>
+          <div class="qn hindi">ملخص القوانين (بالطرق المطلوبة)</div>
           <span class="pill">للاستخدام في الأسئلة</span>
         </div>
 
@@ -313,7 +337,7 @@
           <div class="row blue">
             <span class="lbl">الوسط الحسابي (قيمة مفردة):</span>
             <span class="math">
-              <span>س̄ = </span>
+              <span class="xbar">س</span> =
               <span class="frac">
                 <span class="top"><span class="sigma">∑</span>س</span>
                 <span class="bot">ن</span>
@@ -324,7 +348,7 @@
           <div class="row blue">
             <span class="lbl">الوسط الحسابي (قيم مجمعة):</span>
             <span class="math">
-              <span>س̄ = </span>
+              <span class="xbar">س</span> =
               <span class="frac">
                 <span class="top"><span class="sigma">∑</span>(س×ت)</span>
                 <span class="bot"><span class="sigma">∑</span>ت</span>
@@ -332,27 +356,51 @@
             </span>
           </div>
 
+          <div class="row blue">
+            <span class="lbl">القيم المشفرة (مفردة) — القانون المطلوب:</span>
+            <span class="math">
+              <span class="xbar">س</span> =
+              <span class="frac">
+                <span class="top"><span class="sigma">∑</span>(س − أ)</span>
+                <span class="bot">ن</span>
+              </span>
+              + أ
+            </span>
+          </div>
+
+          <div class="row blue">
+            <span class="lbl">القيم المشفرة (مجمعة):</span>
+            <span class="math">
+              <span class="xbar">س</span> =
+              <span class="frac">
+                <span class="top"><span class="sigma">∑</span>((س − أ)×ت)</span>
+                <span class="bot"><span class="sigma">∑</span>ت</span>
+              </span>
+              + أ
+            </span>
+          </div>
+
           <div class="row amber">
             <span class="lbl">التباين (قيم مفردة):</span>
             <span class="math">
-              <span>التباين = </span>
+              التباين =
               <span class="frac">
                 <span class="top"><span class="sigma">∑</span>س<span class="sup">٢</span></span>
                 <span class="bot">ن</span>
               </span>
-              <span> − (س̄)<span class="sup">٢</span></span>
+              − (<span class="xbar">س</span>)<span class="sup">٢</span>
             </span>
           </div>
 
           <div class="row amber">
             <span class="lbl">التباين (قيم مجمعة):</span>
             <span class="math">
-              <span>التباين = </span>
+              التباين =
               <span class="frac">
                 <span class="top"><span class="sigma">∑</span>(س<span class="sup">٢</span>×ت)</span>
                 <span class="bot"><span class="sigma">∑</span>ت</span>
               </span>
-              <span> − (س̄)<span class="sup">٢</span></span>
+              − (<span class="xbar">س</span>)<span class="sup">٢</span>
             </span>
           </div>
 
@@ -360,90 +408,70 @@
             <span class="lbl">الانحراف المعياري:</span>
             <span class="math">الانحراف المعياري = √(التباين)</span>
           </div>
-
-          <div class="row blue">
-            <span class="lbl">القيم المشفرة:</span>
-            <span class="math">
-              <span>س̄ = </span>
-              <span class="frac">
-                <span class="top"><span class="sigma">∑</span>(س − ب)</span>
-                <span class="bot">ن</span>
-              </span>
-              <span> + ب</span>
-            </span>
-          </div>
         </div>
 
         <div class="svgbox">
-          <svg viewBox="0 0 900 160" width="100%" height="auto" aria-label="مخطط علاقات القوانين">
+          <p class="qtext hindi" style="margin:0 0 6px;">✅ <b>طريقة المثلث (سريعة للطلاب)</b> لإيجاد أي قيمة من (ن ، مجموع ، وسط):</p>
+          <svg viewBox="0 0 900 220" width="100%" height="auto" aria-label="Triangle method">
             <defs>
-              <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-                <path d="M0,0 L10,5 L0,10 Z" fill="#1d4ed8"></path>
-              </marker>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stop-color="#eaf2ff"/>
+                <stop offset="1" stop-color="#ffffff"/>
+              </linearGradient>
             </defs>
-            <rect x="18" y="30" width="260" height="70" rx="14" fill="#eaf2ff" stroke="#c7d2fe"/>
-            <text x="148" y="70" text-anchor="middle" font-size="22" font-weight="800" fill="#0b3a8a">س̄ (الوسط)</text>
+            <rect x="20" y="20" width="860" height="180" rx="18" fill="url(#g1)" stroke="#c7d2fe"/>
 
-            <rect x="320" y="30" width="260" height="70" rx="14" fill="#fff3df" stroke="#fed7aa"/>
-            <text x="450" y="70" text-anchor="middle" font-size="22" font-weight="800" fill="#92400e">التباين</text>
+            <!-- triangle -->
+            <polygon points="450,55 290,175 610,175" fill="#fff" stroke="#1d4ed8" stroke-width="4"/>
+            <text x="450" y="95" text-anchor="middle" font-size="24" font-weight="900" fill="#0b3a8a">∑س</text>
+            <text x="330" y="165" text-anchor="middle" font-size="24" font-weight="900" fill="#0b3a8a">ن</text>
+            <text x="570" y="165" text-anchor="middle" font-size="24" font-weight="900" fill="#0b3a8a">س̄</text>
 
-            <rect x="622" y="30" width="260" height="70" rx="14" fill="#eaf9f0" stroke="#bbf7d0"/>
-            <text x="752" y="70" text-anchor="middle" font-size="22" font-weight="800" fill="#166534">الانحراف المعياري</text>
-
-            <line x1="280" y1="65" x2="320" y2="65" stroke="#1d4ed8" stroke-width="4" marker-end="url(#arrow)"/>
-            <line x1="582" y1="65" x2="622" y2="65" stroke="#1d4ed8" stroke-width="4" marker-end="url(#arrow)"/>
-
-            <text x="450" y="135" text-anchor="middle" font-size="18" font-weight="800" fill="#0f172a">
-              √(التباين) = الانحراف المعياري
+            <text x="450" y="210" text-anchor="middle" font-size="18" font-weight="800" fill="#0f172a">
+              إذا غطّيت ∑س → ن×س̄ ، إذا غطّيت س̄ → ∑س÷ن ، إذا غطّيت ن → ∑س÷س̄
             </text>
           </svg>
-          <p class="hint">الهدف من المخطط: تعرف أين تستخدم كل قانون بسرعة، ثم تطبق بالتعويض خطوة خطوة.</p>
+          <p class="hint hindi">هذه الطريقة نفس اللي يسوونه الطلاب في قوانين السرعة/الزمن/المسافة — سهلة وتحفظ بسرعة.</p>
         </div>
       </div>
 
       <div class="q">
         <div class="qhead">
           <div class="qn hindi">السؤال (١)</div>
-          <span class="pill">الوسط الحسابي</span>
+          <span class="pill">إيجاد قيمة س</span>
         </div>
 
-        <p class="qtext hindi">إذا كان الوسط الحسابي للقيم <span class="math">(٤ ، س ، ١٨ ، ٥ ، ٨)</span> هو <span class="math">١٠</span>، فما قيمة <span class="math">س</span>؟</p>
+        <p class="qtext hindi">
+          إذا كان الوسط الحسابي للقيم <span class="math">(٤ ، س ، ١٨ ، ٥ ، ٨)</span> هو <span class="math">١٠</span>،
+          فما قيمة <span class="math">س</span>؟
+        </p>
 
         <div class="steps">
-          <div class="row blue hindi">
-            <span class="lbl">الفكرة:</span>
-            الوسط = مجموع القيم ÷ عددها (على شكل كسر).
-          </div>
-
-          <div class="row amber hindi">
-            <span class="lbl">عدد القيم:</span> ٥
-          </div>
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — القانون المباشر</span></div>
 
           <div class="row green hindi">
-            <span class="lbl">نكتب المعادلة:</span>
+            <span class="lbl">نكتب:</span>
             <span class="math">
-              ١٠ = 
+              ١٠ =
               <span class="frac">
                 <span class="top">٤ + س + ١٨ + ٥ + ٨</span>
                 <span class="bot">٥</span>
               </span>
             </span>
           </div>
+          <div class="row green hindi"><span class="lbl">نضرب في ٥:</span> <span class="math">٥٠ = ٤ + س + ١٨ + ٥ + ٨</span></div>
+          <div class="row green hindi"><span class="lbl">نجمع الثوابت:</span> <span class="math">٤ + ١٨ + ٥ + ٨ = ٣٥</span> ⟵ إذن <span class="math">٥٠ = س + ٣٥</span></div>
+          <div class="row green hindi"><span class="lbl">نوجد س:</span> <span class="math">س = ٥٠ − ٣٥ = ١٥</span></div>
 
+          <div class="row gray hindi"><span class="method-title">الطريقة (٢) — طريقة المثلث</span></div>
           <div class="row green hindi">
-            <span class="lbl">نضرب في ٥:</span>
-            <span class="math">٥٠ = ٤ + س + ١٨ + ٥ + ٨</span>
+            <span class="lbl">من المثلث:</span>
+            بما أن <span class="math">ن=٥</span> و <span class="math">س̄=١٠</span>
+            إذن <span class="math"><span class="sigma">∑</span>س = ٥×١٠ = ٥٠</span>
           </div>
-
           <div class="row green hindi">
-            <span class="lbl">نجمع الثوابت:</span>
-            <span class="math">٤ + ١٨ + ٥ + ٨ = ٣٥</span>
-            ⟵ إذن <span class="math">٥٠ = س + ٣٥</span>
-          </div>
-
-          <div class="row green hindi">
-            <span class="lbl">نوجد س:</span>
-            <span class="math">س = ٥٠ − ٣٥ = ١٥</span>
+            <span class="lbl">إذن:</span>
+            <span class="math">٤ + س + ١٨ + ٥ + ٨ = ٥٠ ⟹ س = ٥٠ − ٣٥ = ١٥</span>
           </div>
         </div>
 
@@ -453,25 +481,30 @@
       <div class="q">
         <div class="qhead">
           <div class="qn hindi">السؤال (٢)</div>
-          <span class="pill">إيجاد عدد القيم</span>
+          <span class="pill">إيجاد عدد القيم (ن)</span>
         </div>
 
-        <p class="qtext hindi">إذا كان <span class="math"><span class="sigma">∑</span>س = ٤٥</span>، و <span class="math">س̄ = ٥</span>، فإن عدد قيم <span class="math">س</span> يساوي؟</p>
+        <p class="qtext hindi">
+          إذا كان <span class="math"><span class="sigma">∑</span>س = ٤٥</span>،
+          و <span class="math">س̄ = ٥</span>،
+          فإن عدد قيم <span class="math">س</span> يساوي؟
+        </p>
 
         <div class="steps">
-          <div class="row blue hindi">
-            <span class="lbl">القانون:</span>
-            <span class="math">س̄ = <span class="frac"><span class="top"><span class="sigma">∑</span>س</span><span class="bot">ن</span></span></span>
-          </div>
-
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — القانون</span></div>
           <div class="row green hindi">
             <span class="lbl">نعوض:</span>
             <span class="math">٥ = <span class="frac"><span class="top">٤٥</span><span class="bot">ن</span></span></span>
           </div>
-
           <div class="row green hindi">
             <span class="lbl">نوجد ن:</span>
             <span class="math">٥ن = ٤٥ ⟹ ن = <span class="frac"><span class="top">٤٥</span><span class="bot">٥</span></span> = ٩</span>
+          </div>
+
+          <div class="row gray hindi"><span class="method-title">الطريقة (٢) — المثلث</span></div>
+          <div class="row green hindi">
+            <span class="lbl">من المثلث:</span>
+            <span class="math">ن = <span class="frac"><span class="top"><span class="sigma">∑</span>س</span><span class="bot">س̄</span></span> = <span class="frac"><span class="top">٤٥</span><span class="bot">٥</span></span> = ٩</span>
           </div>
         </div>
 
@@ -483,7 +516,7 @@
     <section class="page" id="p28">
       <div class="page-head">
         <div class="pno hindi">الصفحة ٢٨</div>
-        <div class="range hindi">أسئلة: (٣) – (٥)</div>
+        <div class="range hindi">أسئلة: (٣) – (٥) (مع طرق متعددة للسؤال المشفر)</div>
       </div>
 
       <div class="q">
@@ -492,16 +525,23 @@
           <span class="pill">س̄ من ∑س</span>
         </div>
 
-        <p class="qtext hindi">إذا كان <span class="math"><span class="sigma">∑</span>س = ١٢٠</span>، وعدد قيم <span class="math">س</span> هو <span class="math">٢٠</span> قيمة، فإن <span class="math">س̄</span> تساوي؟</p>
+        <p class="qtext hindi">
+          إذا كان <span class="math"><span class="sigma">∑</span>س = ١٢٠</span>،
+          وعدد قيم <span class="math">س</span> هو <span class="math">٢٠</span> قيمة،
+          فإن <span class="math">س̄</span> تساوي؟
+        </p>
 
         <div class="steps">
-          <div class="row blue hindi">
-            <span class="lbl">القانون:</span>
-            <span class="math">س̄ = <span class="frac"><span class="top"><span class="sigma">∑</span>س</span><span class="bot">ن</span></span></span>
-          </div>
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — القانون</span></div>
           <div class="row green hindi">
             <span class="lbl">نعوض:</span>
-            <span class="math">س̄ = <span class="frac"><span class="top">١٢٠</span><span class="bot">٢٠</span></span> = ٦</span>
+            <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">١٢٠</span><span class="bot">٢٠</span></span> = ٦</span>
+          </div>
+
+          <div class="row gray hindi"><span class="method-title">الطريقة (٢) — المثلث</span></div>
+          <div class="row green hindi">
+            <span class="lbl">من المثلث:</span>
+            <span class="math">س̄ = <span class="frac"><span class="top"><span class="sigma">∑</span>س</span><span class="bot">ن</span></span> = <span class="frac"><span class="top">١٢٠</span><span class="bot">٢٠</span></span> = ٦</span>
           </div>
         </div>
 
@@ -514,18 +554,24 @@
           <span class="pill">∑س من س̄</span>
         </div>
 
-        <p class="qtext hindi">إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٦</span> قيم، و <span class="math">س̄ = ١٢</span>، فإن <span class="math"><span class="sigma">∑</span>س</span> تساوي؟</p>
+        <p class="qtext hindi">
+          إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٦</span> قيم،
+          و <span class="math">س̄ = ١٢</span>،
+          فإن <span class="math"><span class="sigma">∑</span>س</span> تساوي؟
+        </p>
 
         <div class="steps">
-          <div class="row blue hindi">
-            <span class="lbl">الفكرة:</span>
-            من <span class="math">س̄ = <span class="frac"><span class="top"><span class="sigma">∑</span>س</span><span class="bot">ن</span></span></span>
-            إذن <span class="math"><span class="sigma">∑</span>س = ن × س̄</span>
-          </div>
-
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — القانون</span></div>
           <div class="row green hindi">
-            <span class="lbl">نعوض:</span>
-            <span class="math"><span class="sigma">∑</span>س = ٦ × ١٢ = ٧٢</span>
+            <span class="lbl">نستخدم:</span>
+            <span class="math"><span class="sigma">∑</span>س = ن × س̄</span>
+          </div>
+          <div class="row green hindi"><span class="lbl">نعوض:</span> <span class="math"><span class="sigma">∑</span>س = ٦ × ١٢ = ٧٢</span></div>
+
+          <div class="row gray hindi"><span class="method-title">الطريقة (٢) — المثلث</span></div>
+          <div class="row green hindi">
+            <span class="lbl">من المثلث:</span>
+            <span class="math"><span class="sigma">∑</span>س = ن×س̄ = ٦×١٢ = ٧٢</span>
           </div>
         </div>
 
@@ -535,25 +581,67 @@
       <div class="q">
         <div class="qhead">
           <div class="qn hindi">السؤال (٥)</div>
-          <span class="pill">مجموع (س − ثابت)</span>
+          <span class="pill">مجموع (س − ثابت) — (٣ طرق)</span>
         </div>
 
-        <p class="qtext hindi">إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٦</span> قيم، و <span class="math">س̄ = ١٢</span>، فإن <span class="math"><span class="sigma">∑</span>(س − ٥)</span> تساوي؟</p>
+        <p class="qtext hindi">
+          إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٦</span> قيم،
+          و <span class="math">س̄ = ١٢</span>،
+          فإن <span class="math"><span class="sigma">∑</span>(س − ٥)</span> تساوي؟
+        </p>
 
         <div class="steps">
-          <div class="row blue hindi">
-            <span class="lbl">أولاً:</span> نحسب <span class="math"><span class="sigma">∑</span>س</span> من المتوسط:
-            <span class="math"><span class="sigma">∑</span>س = ٦ × ١٢ = ٧٢</span>
+          <!-- الطريقة 1 -->
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — الخاصية المباشرة</span></div>
+          <div class="row green hindi">
+            <span class="lbl">أولاً:</span>
+            <span class="math"><span class="sigma">∑</span>س = ٦×١٢ = ٧٢</span>
           </div>
-
           <div class="row amber hindi">
-            <span class="lbl">خاصية مهمة:</span>
+            <span class="lbl">الخاصية:</span>
             <span class="math"><span class="sigma">∑</span>(س − ٥) = <span class="sigma">∑</span>س − ٥ن</span>
           </div>
-
           <div class="row green hindi">
             <span class="lbl">نعوض:</span>
-            <span class="math"><span class="sigma">∑</span>(س − ٥) = ٧٢ − ٥×٦ = ٧٢ − ٣٠ = ٤٢</span>
+            <span class="math">= ٧٢ − ٥×٦ = ٧٢ − ٣٠ = ٤٢</span>
+          </div>
+
+          <!-- الطريقة 2 -->
+          <div class="row gray hindi"><span class="method-title">الطريقة (٢) — قانون التشفير الذي طلبته</span></div>
+          <div class="row green hindi">
+            <span class="lbl">نعتبر:</span> <span class="math">أ = ٥</span>
+            ونعرف أن:
+            <span class="math">
+              <span class="xbar">س</span> =
+              <span class="frac">
+                <span class="top"><span class="sigma">∑</span>(س − أ)</span>
+                <span class="bot">ن</span>
+              </span>
+              + أ
+            </span>
+          </div>
+          <div class="row green hindi">
+            <span class="lbl">إذن:</span>
+            <span class="math">
+              <span class="frac">
+                <span class="top"><span class="sigma">∑</span>(س − ٥)</span>
+                <span class="bot">٦</span>
+              </span>
+              = ١٢ − ٥ = ٧
+            </span>
+          </div>
+          <div class="row green hindi">
+            <span class="lbl">نضرب في ٦:</span>
+            <span class="math"><span class="sigma">∑</span>(س − ٥) = ٧×٦ = ٤٢</span>
+          </div>
+
+          <!-- الطريقة 3 -->
+          <div class="row gray hindi"><span class="method-title">الطريقة (٣) — المثلث + خطوة واحدة</span></div>
+          <div class="row green hindi">
+            <span class="lbl">من المثلث:</span>
+            <span class="math"><span class="sigma">∑</span>س = ٦×١٢ = ٧٢</span>
+            ثم:
+            <span class="math"><span class="sigma">∑</span>(س − ٥) = ٧٢ − ٣٠ = ٤٢</span>
           </div>
         </div>
 
@@ -574,22 +662,23 @@
           <span class="pill">مجموع (س + ثابت)</span>
         </div>
 
-        <p class="qtext hindi">إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٦</span> قيم، و <span class="math">س̄ = ١٢</span>، فإن <span class="math"><span class="sigma">∑</span>(س + ٥)</span> تساوي؟</p>
+        <p class="qtext hindi">
+          إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٦</span> قيم،
+          و <span class="math">س̄ = ١٢</span>،
+          فإن <span class="math"><span class="sigma">∑</span>(س + ٥)</span> تساوي؟
+        </p>
 
         <div class="steps">
-          <div class="row blue hindi">
-            <span class="lbl">أولاً:</span>
-            <span class="math"><span class="sigma">∑</span>س = ٦ × ١٢ = ٧٢</span>
-          </div>
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — الخاصية</span></div>
+          <div class="row green hindi"><span class="lbl">أولاً:</span> <span class="math"><span class="sigma">∑</span>س = ٦×١٢ = ٧٢</span></div>
+          <div class="row amber hindi"><span class="lbl">الخاصية:</span> <span class="math"><span class="sigma">∑</span>(س + ٥) = <span class="sigma">∑</span>س + ٥ن</span></div>
+          <div class="row green hindi"><span class="lbl">نعوض:</span> <span class="math">= ٧٢ + ٥×٦ = ٧٢ + ٣٠ = ١٠٢</span></div>
 
-          <div class="row amber hindi">
-            <span class="lbl">خاصية مهمة:</span>
-            <span class="math"><span class="sigma">∑</span>(س + ٥) = <span class="sigma">∑</span>س + ٥ن</span>
-          </div>
-
+          <div class="row gray hindi"><span class="method-title">الطريقة (٢) — قانون التشفير (أ = ٥)</span></div>
           <div class="row green hindi">
-            <span class="lbl">نعوض:</span>
-            <span class="math"><span class="sigma">∑</span>(س + ٥) = ٧٢ + ٥×٦ = ٧٢ + ٣٠ = ١٠٢</span>
+            <span class="lbl">لاحظ:</span>
+            <span class="math"><span class="sigma">∑</span>(س + ٥) = <span class="sigma">∑</span>(س − (−٥))</span>
+            لكن الأسهل للطلاب هنا تبقى الخاصية (فوق) لأنها أسرع.
           </div>
         </div>
 
@@ -599,30 +688,33 @@
       <div class="q">
         <div class="qhead">
           <div class="qn hindi">السؤال (٧)</div>
-          <span class="pill">إيجاد س̄</span>
+          <span class="pill">إيجاد س̄ من ∑(س−٥)</span>
         </div>
 
-        <p class="qtext hindi">إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٥</span> قيم، و <span class="math"><span class="sigma">∑</span>(س − ٥) = ٤٠</span>، فأوجد <span class="math">س̄</span>.</p>
+        <p class="qtext hindi">
+          إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٥</span> قيم،
+          و <span class="math"><span class="sigma">∑</span>(س − ٥) = ٤٠</span>،
+          فأوجد <span class="math">س̄</span>.
+        </p>
 
         <div class="steps">
-          <div class="row amber hindi">
-            <span class="lbl">نفك المجموع:</span>
-            <span class="math"><span class="sigma">∑</span>(س − ٥) = <span class="sigma">∑</span>س − ٥ن</span>
-          </div>
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — الخاصية</span></div>
+          <div class="row amber hindi"><span class="lbl">نفك:</span> <span class="math"><span class="sigma">∑</span>(س − ٥) = <span class="sigma">∑</span>س − ٥ن</span></div>
+          <div class="row green hindi"><span class="lbl">نعوض:</span> <span class="math">٤٠ = <span class="sigma">∑</span>س − ٥×٥ = <span class="sigma">∑</span>س − ٢٥</span></div>
+          <div class="row green hindi"><span class="lbl">إذن:</span> <span class="math"><span class="sigma">∑</span>س = ٦٥</span></div>
+          <div class="row green hindi"><span class="lbl">الوسط:</span> <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">٦٥</span><span class="bot">٥</span></span> = ١٣</span></div>
 
+          <div class="row gray hindi"><span class="method-title">الطريقة (٢) — قانون التشفير المطلوب</span></div>
+          <div class="row green hindi">
+            <span class="lbl">نستخدم:</span>
+            <span class="math">
+              <span class="xbar">س</span> =
+              <span class="frac"><span class="top"><span class="sigma">∑</span>(س − ٥)</span><span class="bot">ن</span></span> + ٥
+            </span>
+          </div>
           <div class="row green hindi">
             <span class="lbl">نعوض:</span>
-            <span class="math">٤٠ = <span class="sigma">∑</span>س − ٥×٥ = <span class="sigma">∑</span>س − ٢٥</span>
-          </div>
-
-          <div class="row green hindi">
-            <span class="lbl">نوجد ∑س:</span>
-            <span class="math"><span class="sigma">∑</span>س = ٤٠ + ٢٥ = ٦٥</span>
-          </div>
-
-          <div class="row green hindi">
-            <span class="lbl">الوسط:</span>
-            <span class="math">س̄ = <span class="frac"><span class="top">٦٥</span><span class="bot">٥</span></span> = ١٣</span>
+            <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">٤٠</span><span class="bot">٥</span></span> + ٥ = ٨ + ٥ = ١٣</span>
           </div>
         </div>
 
@@ -632,30 +724,31 @@
       <div class="q">
         <div class="qhead">
           <div class="qn hindi">السؤال (٨)</div>
-          <span class="pill">إيجاد س̄</span>
+          <span class="pill">إيجاد س̄ من ∑(س+٥)</span>
         </div>
 
-        <p class="qtext hindi">إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٥</span> قيم، و <span class="math"><span class="sigma">∑</span>(س + ٥) = ٤٠</span>، فأوجد <span class="math">س̄</span>.</p>
+        <p class="qtext hindi">
+          إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٥</span> قيم،
+          و <span class="math"><span class="sigma">∑</span>(س + ٥) = ٤٠</span>،
+          فأوجد <span class="math">س̄</span>.
+        </p>
 
         <div class="steps">
-          <div class="row amber hindi">
-            <span class="lbl">نفك المجموع:</span>
-            <span class="math"><span class="sigma">∑</span>(س + ٥) = <span class="sigma">∑</span>س + ٥ن</span>
-          </div>
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — الخاصية</span></div>
+          <div class="row amber hindi"><span class="lbl">نفك:</span> <span class="math"><span class="sigma">∑</span>(س + ٥) = <span class="sigma">∑</span>س + ٥ن</span></div>
+          <div class="row green hindi"><span class="lbl">نعوض:</span> <span class="math">٤٠ = <span class="sigma">∑</span>س + ٢٥ ⟹ <span class="sigma">∑</span>س = ١٥</span></div>
+          <div class="row green hindi"><span class="lbl">الوسط:</span> <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">١٥</span><span class="bot">٥</span></span> = ٣</span></div>
 
+          <div class="row gray hindi"><span class="method-title">الطريقة (٢) — تحويلها لتشفير</span></div>
+          <div class="row green hindi">
+            <span class="lbl">نكتب:</span>
+            <span class="math"><span class="sigma">∑</span>(س + ٥) = <span class="sigma">∑</span>(س − (−٥))</span>
+            إذن:
+            <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top"><span class="sigma">∑</span>(س + ٥)</span><span class="bot">ن</span></span> − ٥</span>
+          </div>
           <div class="row green hindi">
             <span class="lbl">نعوض:</span>
-            <span class="math">٤٠ = <span class="sigma">∑</span>س + ٥×٥ = <span class="sigma">∑</span>س + ٢٥</span>
-          </div>
-
-          <div class="row green hindi">
-            <span class="lbl">نوجد ∑س:</span>
-            <span class="math"><span class="sigma">∑</span>س = ٤٠ − ٢٥ = ١٥</span>
-          </div>
-
-          <div class="row green hindi">
-            <span class="lbl">الوسط:</span>
-            <span class="math">س̄ = <span class="frac"><span class="top">١٥</span><span class="bot">٥</span></span> = ٣</span>
+            <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">٤٠</span><span class="bot">٥</span></span> − ٥ = ٨ − ٥ = ٣</span>
           </div>
         </div>
 
@@ -673,30 +766,31 @@
       <div class="q">
         <div class="qhead">
           <div class="qn hindi">السؤال (٩)</div>
-          <span class="pill">س̄ من ∑(س + ثابت)</span>
+          <span class="pill">س̄ من ∑(س + ٦)</span>
         </div>
 
-        <p class="qtext hindi">إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٥</span> قيم، و <span class="math"><span class="sigma">∑</span>(س + ٦) = ٦٠</span>، فإن <span class="math">س̄</span> تساوي؟</p>
+        <p class="qtext hindi">
+          إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٥</span> قيم،
+          و <span class="math"><span class="sigma">∑</span>(س + ٦) = ٦٠</span>،
+          فإن <span class="math">س̄</span> تساوي؟
+        </p>
 
         <div class="steps">
-          <div class="row amber hindi">
-            <span class="lbl">نفك المجموع:</span>
-            <span class="math"><span class="sigma">∑</span>(س + ٦) = <span class="sigma">∑</span>س + ٦ن</span>
-          </div>
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — الخاصية</span></div>
+          <div class="row amber hindi"><span class="lbl">نفك:</span> <span class="math"><span class="sigma">∑</span>(س + ٦) = <span class="sigma">∑</span>س + ٦ن</span></div>
+          <div class="row green hindi"><span class="lbl">نعوض:</span> <span class="math">٦٠ = <span class="sigma">∑</span>س + ٦×٥ = <span class="sigma">∑</span>س + ٣٠ ⟹ <span class="sigma">∑</span>س = ٣٠</span></div>
+          <div class="row green hindi"><span class="lbl">الوسط:</span> <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">٣٠</span><span class="bot">٥</span></span> = ٦</span></div>
 
+          <div class="row gray hindi"><span class="method-title">الطريقة (٢) — تشفير (أ = −٦)</span></div>
+          <div class="row green hindi">
+            <span class="lbl">لأن:</span>
+            <span class="math"><span class="sigma">∑</span>(س + ٦) = <span class="sigma">∑</span>(س − (−٦))</span>
+            إذن:
+            <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top"><span class="sigma">∑</span>(س + ٦)</span><span class="bot">٥</span></span> − ٦</span>
+          </div>
           <div class="row green hindi">
             <span class="lbl">نعوض:</span>
-            <span class="math">٦٠ = <span class="sigma">∑</span>س + ٦×٥ = <span class="sigma">∑</span>س + ٣٠</span>
-          </div>
-
-          <div class="row green hindi">
-            <span class="lbl">نوجد ∑س:</span>
-            <span class="math"><span class="sigma">∑</span>س = ٦٠ − ٣٠ = ٣٠</span>
-          </div>
-
-          <div class="row green hindi">
-            <span class="lbl">الوسط:</span>
-            <span class="math">س̄ = <span class="frac"><span class="top">٣٠</span><span class="bot">٥</span></span> = ٦</span>
+            <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">٦٠</span><span class="bot">٥</span></span> − ٦ = ١٢ − ٦ = ٦</span>
           </div>
         </div>
 
@@ -709,17 +803,25 @@
           <span class="pill">وسط (قيم مجمعة)</span>
         </div>
 
-        <p class="qtext hindi">إذا كان <span class="math"><span class="sigma">∑</span>ت = ٢٥</span>، و <span class="math"><span class="sigma">∑</span>(س×ت) = ١٥٠</span>، فإن <span class="math">س̄</span> تساوي؟</p>
+        <p class="qtext hindi">
+          إذا كان <span class="math"><span class="sigma">∑</span>ت = ٢٥</span>،
+          و <span class="math"><span class="sigma">∑</span>(س×ت) = ١٥٠</span>،
+          فإن <span class="math">س̄</span> تساوي؟
+        </p>
 
         <div class="steps">
-          <div class="row blue hindi">
-            <span class="lbl">القانون:</span>
-            <span class="math">س̄ = <span class="frac"><span class="top"><span class="sigma">∑</span>(س×ت)</span><span class="bot"><span class="sigma">∑</span>ت</span></span></span>
-          </div>
-
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — القانون</span></div>
           <div class="row green hindi">
             <span class="lbl">نعوض:</span>
-            <span class="math">س̄ = <span class="frac"><span class="top">١٥٠</span><span class="bot">٢٥</span></span> = ٦</span>
+            <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">١٥٠</span><span class="bot">٢٥</span></span> = ٦</span>
+          </div>
+
+          <div class="row gray hindi"><span class="method-title">الطريقة (٢) — مثلث (للمجمعة)</span></div>
+          <div class="row green hindi">
+            <span class="lbl">اعتبر:</span>
+            مجموع هنا = <span class="math"><span class="sigma">∑</span>(س×ت)</span>
+            والعدد = <span class="math"><span class="sigma">∑</span>ت</span>
+            إذن نفس فكرة المثلث: <span class="math">س̄ = ١٥٠÷٢٥ = ٦</span>
           </div>
         </div>
 
@@ -729,36 +831,35 @@
       <div class="q">
         <div class="qhead">
           <div class="qn hindi">السؤال (١١)</div>
-          <span class="pill">وسط من مجموع مشفر (مجمعة)</span>
+          <span class="pill">مشفر (مجمعة) — بالطريقة المطلوبة</span>
         </div>
 
-        <p class="qtext hindi">إذا كان <span class="math"><span class="sigma">∑</span>ت = ٢٥</span>، و <span class="math"><span class="sigma">∑</span>((س − ٥)×ت) = ١٥٠</span>، فإن <span class="math">س̄</span> تساوي؟</p>
+        <p class="qtext hindi">
+          إذا كان <span class="math"><span class="sigma">∑</span>ت = ٢٥</span>،
+          و <span class="math"><span class="sigma">∑</span>((س − ٥)×ت) = ١٥٠</span>،
+          فإن <span class="math">س̄</span> تساوي؟
+        </p>
 
         <div class="steps">
-          <div class="row amber hindi">
-            <span class="lbl">نفك التشفير:</span>
-            <span class="math"><span class="sigma">∑</span>((س − ٥)×ت) = <span class="sigma">∑</span>(س×ت) − ٥<span class="sigma">∑</span>ت</span>
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — قانون التشفير (المجمعة)</span></div>
+          <div class="row green hindi">
+            <span class="lbl">القانون:</span>
+            <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top"><span class="sigma">∑</span>((س − ٥)×ت)</span><span class="bot"><span class="sigma">∑</span>ت</span></span> + ٥</span>
           </div>
-
           <div class="row green hindi">
             <span class="lbl">نعوض:</span>
-            <span class="math">١٥٠ = <span class="sigma">∑</span>(س×ت) − ٥×٢٥</span>
+            <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">١٥٠</span><span class="bot">٢٥</span></span> + ٥ = ٦ + ٥ = ١١</span>
           </div>
 
-          <div class="row green hindi">
-            <span class="lbl">احسب ٥×٢٥:</span>
-            <span class="math">٥×٢٥ = ١٢٥</span>
+          <div class="row gray hindi"><span class="method-title">الطريقة (٢) — فك التشفير ثم الوسط</span></div>
+          <div class="row amber hindi">
+            <span class="lbl">نفك:</span>
+            <span class="math"><span class="sigma">∑</span>((س − ٥)×ت) = <span class="sigma">∑</span>(س×ت) − ٥<span class="sigma">∑</span>ت</span>
           </div>
-
-          <div class="row green hindi">
-            <span class="lbl">نوجد ∑(س×ت):</span>
-            <span class="math"><span class="sigma">∑</span>(س×ت) = ١٥٠ + ١٢٥ = ٢٧٥</span>
-          </div>
-
-          <div class="row green hindi">
-            <span class="lbl">الوسط:</span>
-            <span class="math">س̄ = <span class="frac"><span class="top">٢٧٥</span><span class="bot">٢٥</span></span> = ١١</span>
-          </div>
+          <div class="row green hindi"><span class="lbl">نعوض:</span> <span class="math">١٥٠ = <span class="sigma">∑</span>(س×ت) − ٥×٢٥</span></div>
+          <div class="row green hindi"><span class="lbl">٥×٢٥:</span> <span class="math">= ١٢٥</span></div>
+          <div class="row green hindi"><span class="lbl">إذن:</span> <span class="math"><span class="sigma">∑</span>(س×ت) = ١٥٠ + ١٢٥ = ٢٧٥</span></div>
+          <div class="row green hindi"><span class="lbl">الوسط:</span> <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">٢٧٥</span><span class="bot">٢٥</span></span> = ١١</span></div>
         </div>
 
         <div class="ans hindi">الإجابة: ١١</div>
@@ -778,25 +879,18 @@
           <span class="pill">التباين (قيم مفردة)</span>
         </div>
 
-        <p class="qtext hindi">إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٢٥</span> قيمة، و <span class="math"><span class="sigma">∑</span>س = ١٥٠</span>، و <span class="math"><span class="sigma">∑</span>س<span class="sup">٢</span> = ١٥٠٠</span>، فإن التباين يساوي؟</p>
+        <p class="qtext hindi">
+          إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٢٥</span> قيمة،
+          و <span class="math"><span class="sigma">∑</span>س = ١٥٠</span>،
+          و <span class="math"><span class="sigma">∑</span>س<span class="sup">٢</span> = ١٥٠٠</span>،
+          فإن التباين يساوي؟
+        </p>
 
         <div class="steps">
-          <div class="row blue hindi">
-            <span class="lbl">أولاً (المتوسط):</span>
-            <span class="math">س̄ = <span class="frac"><span class="top">١٥٠</span><span class="bot">٢٥</span></span> = ٦</span>
-          </div>
-
-          <div class="row blue hindi">
-            <span class="lbl">ثانياً (متوسط المربعات):</span>
-            <span class="math">
-              <span class="frac"><span class="top">١٥٠٠</span><span class="bot">٢٥</span></span> = ٦٠
-            </span>
-          </div>
-
-          <div class="row amber hindi">
-            <span class="lbl">التباين:</span>
-            <span class="math">التباين = ٦٠ − (٦)<span class="sup">٢</span> = ٦٠ − ٣٦ = ٢٤</span>
-          </div>
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — خطوة خطوة</span></div>
+          <div class="row green hindi"><span class="lbl">المتوسط:</span> <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">١٥٠</span><span class="bot">٢٥</span></span> = ٦</span></div>
+          <div class="row green hindi"><span class="lbl">متوسط المربعات:</span> <span class="math"><span class="frac"><span class="top">١٥٠٠</span><span class="bot">٢٥</span></span> = ٦٠</span></div>
+          <div class="row amber hindi"><span class="lbl">التباين:</span> <span class="math">= ٦٠ − (٦)<span class="sup">٢</span> = ٦٠ − ٣٦ = ٢٤</span></div>
         </div>
 
         <div class="ans hindi">الإجابة: ٢٤</div>
@@ -808,28 +902,19 @@
           <span class="pill">الانحراف المعياري</span>
         </div>
 
-        <p class="qtext hindi">إذا كان عدد قيم <span class="math">س</span> هو <span class="math">١٠</span> قيم، و <span class="math"><span class="sigma">∑</span>س = ٥٠</span>، و <span class="math"><span class="sigma">∑</span>س<span class="sup">٢</span> = ٣٠٠</span>، فإن الانحراف المعياري يساوي؟</p>
+        <p class="qtext hindi">
+          إذا كان عدد قيم <span class="math">س</span> هو <span class="math">١٠</span> قيم،
+          و <span class="math"><span class="sigma">∑</span>س = ٥٠</span>،
+          و <span class="math"><span class="sigma">∑</span>س<span class="sup">٢</span> = ٣٠٠</span>،
+          فإن الانحراف المعياري يساوي؟
+        </p>
 
         <div class="steps">
-          <div class="row blue hindi">
-            <span class="lbl">المتوسط:</span>
-            <span class="math">س̄ = <span class="frac"><span class="top">٥٠</span><span class="bot">١٠</span></span> = ٥</span>
-          </div>
-
-          <div class="row blue hindi">
-            <span class="lbl">متوسط المربعات:</span>
-            <span class="math"><span class="frac"><span class="top">٣٠٠</span><span class="bot">١٠</span></span> = ٣٠</span>
-          </div>
-
-          <div class="row amber hindi">
-            <span class="lbl">التباين:</span>
-            <span class="math">التباين = ٣٠ − (٥)<span class="sup">٢</span> = ٣٠ − ٢٥ = ٥</span>
-          </div>
-
-          <div class="row green hindi">
-            <span class="lbl">الانحراف المعياري:</span>
-            <span class="math">√٥</span>
-          </div>
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — خطوة خطوة</span></div>
+          <div class="row green hindi"><span class="lbl">المتوسط:</span> <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">٥٠</span><span class="bot">١٠</span></span> = ٥</span></div>
+          <div class="row green hindi"><span class="lbl">متوسط المربعات:</span> <span class="math"><span class="frac"><span class="top">٣٠٠</span><span class="bot">١٠</span></span> = ٣٠</span></div>
+          <div class="row amber hindi"><span class="lbl">التباين:</span> <span class="math">= ٣٠ − (٥)<span class="sup">٢</span> = ٣٠ − ٢٥ = ٥</span></div>
+          <div class="row green hindi"><span class="lbl">الانحراف:</span> <span class="math">√٥</span></div>
         </div>
 
         <div class="ans hindi">الإجابة: √٥</div>
@@ -841,28 +926,19 @@
           <span class="pill">مجمعة (التباين ثم الانحراف)</span>
         </div>
 
-        <p class="qtext hindi">إذا كان <span class="math"><span class="sigma">∑</span>ت = ٢٥</span>، و <span class="math"><span class="sigma">∑</span>(س×ت) = ١٥٠</span>، و <span class="math"><span class="sigma">∑</span>(س<span class="sup">٢</span>×ت) = ٩٠٠</span>، فإن الانحراف المعياري يساوي؟</p>
+        <p class="qtext hindi">
+          إذا كان <span class="math"><span class="sigma">∑</span>ت = ٢٥</span>،
+          و <span class="math"><span class="sigma">∑</span>(س×ت) = ١٥٠</span>،
+          و <span class="math"><span class="sigma">∑</span>(س<span class="sup">٢</span>×ت) = ٩٠٠</span>،
+          فإن الانحراف المعياري يساوي؟
+        </p>
 
         <div class="steps">
-          <div class="row blue hindi">
-            <span class="lbl">المتوسط:</span>
-            <span class="math">س̄ = <span class="frac"><span class="top">١٥٠</span><span class="bot">٢٥</span></span> = ٦</span>
-          </div>
-
-          <div class="row blue hindi">
-            <span class="lbl">متوسط المربعات:</span>
-            <span class="math"><span class="frac"><span class="top">٩٠٠</span><span class="bot">٢٥</span></span> = ٣٦</span>
-          </div>
-
-          <div class="row amber hindi">
-            <span class="lbl">التباين:</span>
-            <span class="math">التباين = ٣٦ − (٦)<span class="sup">٢</span> = ٣٦ − ٣٦ = ٠</span>
-          </div>
-
-          <div class="row green hindi">
-            <span class="lbl">الانحراف المعياري:</span>
-            <span class="math">√٠ = ٠</span>
-          </div>
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — خطوة خطوة</span></div>
+          <div class="row green hindi"><span class="lbl">المتوسط:</span> <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">١٥٠</span><span class="bot">٢٥</span></span> = ٦</span></div>
+          <div class="row green hindi"><span class="lbl">متوسط المربعات:</span> <span class="math"><span class="frac"><span class="top">٩٠٠</span><span class="bot">٢٥</span></span> = ٣٦</span></div>
+          <div class="row amber hindi"><span class="lbl">التباين:</span> <span class="math">= ٣٦ − (٦)<span class="sup">٢</span> = ٣٦ − ٣٦ = ٠</span></div>
+          <div class="row green hindi"><span class="lbl">الانحراف:</span> <span class="math">√٠ = ٠</span></div>
         </div>
 
         <div class="ans hindi">الإجابة: ٠</div>
@@ -879,26 +955,21 @@
       <div class="q">
         <div class="qhead">
           <div class="qn hindi">السؤال (١٥)</div>
-          <span class="pill">الانحراف المعياري (قيم مفردة)</span>
+          <span class="pill">الانحراف المعياري (مفردة)</span>
         </div>
 
-        <p class="qtext hindi">إذا كان عدد قيم <span class="math">س</span> هو <span class="math">١٠</span> قيم، و <span class="math">س̄ = ٤</span>، و <span class="math"><span class="sigma">∑</span>س<span class="sup">٢</span> = ٢٥٠</span>، فإن الانحراف المعياري يساوي؟</p>
+        <p class="qtext hindi">
+          إذا كان عدد قيم <span class="math">س</span> هو <span class="math">١٠</span> قيم،
+          و <span class="math">س̄ = ٤</span>،
+          و <span class="math"><span class="sigma">∑</span>س<span class="sup">٢</span> = ٢٥٠</span>،
+          فإن الانحراف المعياري يساوي؟
+        </p>
 
         <div class="steps">
-          <div class="row blue hindi">
-            <span class="lbl">متوسط المربعات:</span>
-            <span class="math"><span class="frac"><span class="top">٢٥٠</span><span class="bot">١٠</span></span> = ٢٥</span>
-          </div>
-
-          <div class="row amber hindi">
-            <span class="lbl">التباين:</span>
-            <span class="math">التباين = ٢٥ − (٤)<span class="sup">٢</span> = ٢٥ − ١٦ = ٩</span>
-          </div>
-
-          <div class="row green hindi">
-            <span class="lbl">الانحراف المعياري:</span>
-            <span class="math">√٩ = ٣</span>
-          </div>
+          <div class="row blue hindi"><span class="method-title">الطريقة (١)</span></div>
+          <div class="row green hindi"><span class="lbl">متوسط المربعات:</span> <span class="math"><span class="frac"><span class="top">٢٥٠</span><span class="bot">١٠</span></span> = ٢٥</span></div>
+          <div class="row amber hindi"><span class="lbl">التباين:</span> <span class="math">= ٢٥ − (٤)<span class="sup">٢</span> = ٢٥ − ١٦ = ٩</span></div>
+          <div class="row green hindi"><span class="lbl">الانحراف:</span> <span class="math">√٩ = ٣</span></div>
         </div>
 
         <div class="ans hindi">الإجابة: ٣</div>
@@ -907,26 +978,21 @@
       <div class="q">
         <div class="qhead">
           <div class="qn hindi">السؤال (١٦)</div>
-          <span class="pill">الانحراف المعياري</span>
+          <span class="pill">الانحراف المعياري (مفردة)</span>
         </div>
 
-        <p class="qtext hindi">إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٦</span> قيم، و <span class="math">س̄ = ٨</span>، و <span class="math"><span class="sigma">∑</span>س<span class="sup">٢</span> = ٦٠٠</span>، فإن الانحراف المعياري يساوي؟</p>
+        <p class="qtext hindi">
+          إذا كان عدد قيم <span class="math">س</span> هو <span class="math">٦</span> قيم،
+          و <span class="math">س̄ = ٨</span>،
+          و <span class="math"><span class="sigma">∑</span>س<span class="sup">٢</span> = ٦٠٠</span>،
+          فإن الانحراف المعياري يساوي؟
+        </p>
 
         <div class="steps">
-          <div class="row blue hindi">
-            <span class="lbl">متوسط المربعات:</span>
-            <span class="math"><span class="frac"><span class="top">٦٠٠</span><span class="bot">٦</span></span> = ١٠٠</span>
-          </div>
-
-          <div class="row amber hindi">
-            <span class="lbl">التباين:</span>
-            <span class="math">التباين = ١٠٠ − (٨)<span class="sup">٢</span> = ١٠٠ − ٦٤ = ٣٦</span>
-          </div>
-
-          <div class="row green hindi">
-            <span class="lbl">الانحراف المعياري:</span>
-            <span class="math">√٣٦ = ٦</span>
-          </div>
+          <div class="row blue hindi"><span class="method-title">الطريقة (١)</span></div>
+          <div class="row green hindi"><span class="lbl">متوسط المربعات:</span> <span class="math"><span class="frac"><span class="top">٦٠٠</span><span class="bot">٦</span></span> = ١٠٠</span></div>
+          <div class="row amber hindi"><span class="lbl">التباين:</span> <span class="math">= ١٠٠ − (٨)<span class="sup">٢</span> = ١٠٠ − ٦٤ = ٣٦</span></div>
+          <div class="row green hindi"><span class="lbl">الانحراف:</span> <span class="math">√٣٦ = ٦</span></div>
         </div>
 
         <div class="ans hindi">الإجابة: ٦</div>
@@ -970,55 +1036,49 @@
         </table>
 
         <div class="steps" style="margin-top:10px;">
-          <div class="row blue hindi">
-            <span class="lbl">١) نحسب:</span>
-            <span class="math"><span class="sigma">∑</span>ت</span> و
-            <span class="math"><span class="sigma">∑</span>(س×ت)</span> و
-            <span class="math"><span class="sigma">∑</span>(س<span class="sup">٢</span>×ت)</span>
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — جدول مساعد</span></div>
+
+          <div class="row green hindi">
+            <span class="lbl">∑ت:</span>
+            <span class="math">٣+٢+٣+٤ = ١٢</span>
           </div>
 
           <div class="row green hindi">
             <span class="lbl">قيم س×ت:</span>
-            <span class="math">
-              (٢×٣)=٦ ، (٣×٢)=٦ ، (٥×٣)=١٥ ، (٦×٤)=٢٤
-            </span>
+            <span class="math">(٢×٣)=٦ ، (٣×٢)=٦ ، (٥×٣)=١٥ ، (٦×٤)=٢٤</span>
           </div>
 
           <div class="row green hindi">
-            <span class="lbl">إذن:</span>
-            <span class="math"><span class="sigma">∑</span>ت = ٣+٢+٣+٤ = ١٢</span>،
-            <span class="math"><span class="sigma">∑</span>(س×ت) = ٦+٦+١٥+٢٤ = ٥١</span>
+            <span class="lbl">∑(س×ت):</span>
+            <span class="math">٦+٦+١٥+٢٤ = ٥١</span>
           </div>
 
           <div class="row blue hindi">
-            <span class="lbl">الوسط الحسابي:</span>
-            <span class="math">س̄ = <span class="frac"><span class="top">٥١</span><span class="bot">١٢</span></span></span>
-            <span class="math">= ٤٫٢٥</span>
+            <span class="lbl">الوسط:</span>
+            <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">٥١</span><span class="bot">١٢</span></span> = ٤٫٢٥</span>
           </div>
 
           <div class="row green hindi">
             <span class="lbl">قيم س²×ت:</span>
-            <span class="math">
-              (٢²×٣)=١٢ ، (٣²×٢)=١٨ ، (٥²×٣)=٧٥ ، (٦²×٤)=١٤٤
-            </span>
+            <span class="math">(٢²×٣)=١٢ ، (٣²×٢)=١٨ ، (٥²×٣)=٧٥ ، (٦²×٤)=١٤٤</span>
           </div>
 
           <div class="row green hindi">
-            <span class="lbl">إذن:</span>
-            <span class="math"><span class="sigma">∑</span>(س²×ت) = ١٢+١٨+٧٥+١٤٤ = ٢٤٩</span>
+            <span class="lbl">∑(س²×ت):</span>
+            <span class="math">١٢+١٨+٧٥+١٤٤ = ٢٤٩</span>
           </div>
 
           <div class="row amber hindi">
             <span class="lbl">التباين:</span>
             <span class="math">
-              التباين =
+              =
               <span class="frac"><span class="top">٢٤٩</span><span class="bot">١٢</span></span>
               − (٤٫٢٥)²
             </span>
           </div>
 
           <div class="row amber hindi">
-            <span class="lbl">حساب سريع:</span>
+            <span class="lbl">حساب:</span>
             <span class="math">
               <span class="frac"><span class="top">٢٤٩</span><span class="bot">١٢</span></span> = ٢٠٫٧٥
               ، و (٤٫٢٥)² = ١٨٫٠٦٢٥
@@ -1027,7 +1087,7 @@
           </div>
 
           <div class="row green hindi">
-            <span class="lbl">الانحراف المعياري:</span>
+            <span class="lbl">الانحراف:</span>
             <span class="math">√٢٫٦٨٧٥ ≈ ١٫٦٤</span>
           </div>
         </div>
@@ -1045,17 +1105,14 @@
 
         <div class="svgbox">
           <svg viewBox="0 0 900 260" width="100%" height="auto" aria-label="Bar chart">
-            <!-- axes -->
             <line x1="70" y1="30" x2="70" y2="220" stroke="#0f172a" stroke-width="3"/>
             <line x1="70" y1="220" x2="850" y2="220" stroke="#0f172a" stroke-width="3"/>
 
-            <!-- bars: x=2 f=3 ; x=3 f=2 ; x=5 f=3 ; x=6 f=4 -->
             <rect x="150" y="120" width="90" height="100" fill="#c7d2fe" stroke="#1d4ed8"/>
             <rect x="320" y="150" width="90" height="70" fill="#bbf7d0" stroke="#16a34a"/>
             <rect x="490" y="120" width="90" height="100" fill="#fed7aa" stroke="#f59e0b"/>
             <rect x="660" y="90"  width="90" height="130" fill="#fecaca" stroke="#b91c1c"/>
 
-            <!-- labels -->
             <text x="195" y="245" text-anchor="middle" font-size="18" font-weight="800" fill="#0f172a">س=٢</text>
             <text x="365" y="245" text-anchor="middle" font-size="18" font-weight="800" fill="#0f172a">س=٣</text>
             <text x="535" y="245" text-anchor="middle" font-size="18" font-weight="800" fill="#0f172a">س=٥</text>
@@ -1063,7 +1120,7 @@
 
             <text x="40" y="60"  text-anchor="middle" font-size="16" font-weight="800" fill="#0f172a">ت</text>
           </svg>
-          <p class="hint">الرسمة تساعد الطالب يلاحظ أن أعلى تكرار عند س = ٦.</p>
+          <p class="hint hindi">الرسمة تساعد الطالب يلاحظ أن أعلى تكرار عند س = ٦.</p>
         </div>
       </div>
     </section>
@@ -1118,31 +1175,23 @@
         </table>
 
         <div class="steps" style="margin-top:10px;">
-          <div class="row blue hindi">
-            <span class="lbl">(أ) أوجد قيمة هـ:</span>
-            بما أن مجموع التكرارات = ٥٠
-          </div>
-
+          <div class="row blue hindi"><span class="method-title">(أ) أوجد قيمة هـ</span></div>
           <div class="row green hindi">
-            <span class="lbl">نحسب هـ:</span>
+            <span class="lbl">بما أن:</span> مجموع التكرارات = ٥٠
+          </div>
+          <div class="row green hindi">
+            <span class="lbl">إذن:</span>
             <span class="math">هـ = ٥٠ − (٨ + ١٢ + ١٣ + ٧)</span>
           </div>
-
           <div class="row green hindi">
             <span class="lbl">نجمع:</span>
-            <span class="math">٨ + ١٢ + ١٣ + ٧ = ٤٠ ⟹ هـ = ٥٠ − ٤٠ = ١٠</span>
+            <span class="math">٨ + ١٢ + ١٣ + ٧ = ٤٠ ⟹ هـ = ١٠</span>
           </div>
 
-          <div class="row blue hindi">
-            <span class="lbl">(ب) أكمل س×ت:</span>
-            نحسب ضرب كل عمود.
-          </div>
-
+          <div class="row blue hindi"><span class="method-title">(ب) أكمل س×ت</span></div>
           <div class="row green hindi">
             <span class="lbl">س×ت:</span>
-            <span class="math">
-              ٢×٨=١٦ ، ٣×١٠=٣٠ ، ٤×١٢=٤٨ ، ٥×١٣=٦٥ ، ٦×٧=٤٢
-            </span>
+            <span class="math">٢×٨=١٦ ، ٣×١٠=٣٠ ، ٤×١٢=٤٨ ، ٥×١٣=٦٥ ، ٦×٧=٤٢</span>
           </div>
 
           <div class="row green hindi">
@@ -1150,9 +1199,14 @@
             <span class="math">١٦ + ٣٠ + ٤٨ + ٦٥ + ٤٢ = ٢٠١</span>
           </div>
 
-          <div class="row amber hindi">
-            <span class="lbl">(ج) احسب الوسط الحسابي:</span>
-            <span class="math">س̄ = <span class="frac"><span class="top">٢٠١</span><span class="bot">٥٠</span></span> = ٤٫٠٢</span>
+          <div class="row amber hindi"><span class="method-title">(ج) احسب الوسط</span></div>
+          <div class="row green hindi">
+            <span class="lbl">القانون:</span>
+            <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top"><span class="sigma">∑</span>(س×ت)</span><span class="bot"><span class="sigma">∑</span>ت</span></span></span>
+          </div>
+          <div class="row green hindi">
+            <span class="lbl">نعوض:</span>
+            <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">٢٠١</span><span class="bot">٥٠</span></span> = ٤٫٠٢</span>
           </div>
         </div>
 
@@ -1165,21 +1219,22 @@
           <span class="pill">وسط حسابي لبيانات</span>
         </div>
 
-        <p class="qtext hindi">البيانات التالية تمثل قيم س: <span class="math">(٤٥ ، ٣٥ ، ٤٢ ، ٤٩ ، ٣٩ ، ٣٤)</span>. أوجد الوسط الحسابي.</p>
+        <p class="qtext hindi">
+          البيانات التالية تمثل قيم س:
+          <span class="math">(٤٥ ، ٣٥ ، ٤٢ ، ٤٩ ، ٣٩ ، ٣٤)</span>.
+          أوجد الوسط الحسابي.
+        </p>
 
         <div class="steps">
-          <div class="row blue hindi">
-            <span class="lbl">نجمع القيم:</span>
-            <span class="math">٤٥ + ٣٥ + ٤٢ + ٤٩ + ٣٩ + ٣٤ = ٢٤٤</span>
-          </div>
+          <div class="row blue hindi"><span class="method-title">الطريقة (١) — جمع ثم قسمة</span></div>
+          <div class="row green hindi"><span class="lbl">المجموع:</span> <span class="math">٤٥ + ٣٥ + ٤٢ + ٤٩ + ٣٩ + ٣٤ = ٢٤٤</span></div>
+          <div class="row green hindi"><span class="lbl">عدد القيم:</span> ٦</div>
+          <div class="row green hindi"><span class="lbl">الوسط:</span> <span class="math"><span class="xbar">س</span> = <span class="frac"><span class="top">٢٤٤</span><span class="bot">٦</span></span> = ٤٠٫٦٦…</span></div>
 
+          <div class="row gray hindi"><span class="method-title">الطريقة (٢) — المثلث</span></div>
           <div class="row green hindi">
-            <span class="lbl">عدد القيم:</span> ٦
-          </div>
-
-          <div class="row green hindi">
-            <span class="lbl">الوسط:</span>
-            <span class="math">س̄ = <span class="frac"><span class="top">٢٤٤</span><span class="bot">٦</span></span> = ٤٠٫٦٦…</span>
+            <span class="lbl">من المثلث:</span>
+            <span class="math">س̄ = ∑س ÷ ن = ٢٤٤ ÷ ٦ = ٤٠٫٦٦…</span>
           </div>
         </div>
 
@@ -1188,7 +1243,7 @@
 
       <div class="divider"></div>
       <p class="hint hindi" style="text-align:center; margin-top:10px;">
-        انتهت الصفحات من ٢٧ إلى ٣٤ (بنفس ترتيب المصدر) ✅
+        انتهت الصفحات من ٢٧ إلى ٣٤ ✅
       </p>
     </section>
 
@@ -1203,10 +1258,8 @@
         return str.replace(/[0-9]/g, d => map[d]);
       }
 
-      // حول النصوص داخل العناصر التي تحمل class=hindi + كذلك النص الكامل مع استثناء عناصر math (لأنها LTR)
       const targets = document.querySelectorAll('.hindi');
       targets.forEach(el=>{
-        // لا نلمس عناصر الماث نفسها لأنها مضبوطة
         const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
         const nodes = [];
         while(walker.nextNode()) nodes.push(walker.currentNode);
